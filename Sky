@@ -11,7 +11,6 @@ local _5=game:GetService(string.char(85,115,101,114,73,110,112,117,116,83,101,11
 local _6=game:GetService(string.char(86,105,114,116,117,97,108,73,110,112,117,116,77,97,110,97,103,101,114))
 local _7=game:GetService(string.char(87,111,114,107,115,112,97,99,101))
 local _8=_3.LocalPlayer
-local _9=_7.CurrentCamera
 
 local _a=_0:CreateWindow({
 Title=string.char(83,107,121,76,105,110,103),
@@ -298,3 +297,66 @@ if _E.KeyCode==_ai.ToggleKey then
 _am(not _ai.isActive)
 end
 end)
+
+-- ==================== TABS ====================
+local _ap=_a:Tab({Title=string.char(82,101,97,99,104),Icon=string.char(116,97,114,103,101,116)})
+
+_ap:Toggle({
+Title=string.char(82,101,97,99,104),
+Value=false,
+Callback=function(_aq)
+_b.isActive=_aq
+end
+})
+
+_ap:Slider({
+Title=string.char(82,101,97,99,104,32,68,105,115,116,97,110,99,101),
+Step=0.5,
+Value={Min=1,Max=10,Default=7},
+Callback=function(_aq)
+_b.reach=_aq
+end
+})
+
+local _ar=_a:Tab({Title=string.char(72,101,108,112,115),Icon=string.char(104,101,108,112,45,99,105,114,99,108,101)})
+
+_ar:Toggle({
+Title=string.char(84,111,116,32,40,77,111,98,105,108,101,41),
+Value=false,
+Callback=function(_aq)
+if _aq then _v() else _t() end
+end
+})
+
+_ar:Toggle({
+Title=string.char(65,117,116,111,32,72,97,109,98,111,108,111,32,40,80,67,41),
+Value=false,
+Callback=function(_aq)
+_am(_aq)
+end
+})
+
+_ar:Keybind({
+Title=string.char(65,117,116,111,32,72,97,109,98,111,108,111,32,75,101,121,98,105,110,100),
+Value=Enum.KeyCode.R,
+Callback=function(_aq)
+if typeof(_aq)==string.char(69,110,117,109,73,116,101,109) then
+_ai.ToggleKey=_aq
+elseif type(_aq)==string.char(115,116,114,105,110,103) then
+_ai.ToggleKey=Enum.KeyCode[_aq] or Enum.KeyCode.R
+end
+end
+})
+
+local _as=_a:Tab({Title=string.char(83,101,116,116,105,110,103,115),Icon=string.char(115,101,116,116,105,110,103,115)})
+
+_as:Keybind({
+Title=string.char(84,111,103,103,108,101,32,85,73,32,75,101,121),
+Value=Enum.KeyCode.RightShift,
+Callback=function(_aq)
+local _at=(typeof(_aq)==string.char(69,110,117,109,73,116,101,109)) and _aq or Enum.KeyCode[_aq]
+if _at then
+_a:SetToggleKey(_at)
+end
+end
+})
