@@ -1,662 +1,970 @@
-local _0
-local _1,_2=pcall(function()_0=loadstring(game:HttpGet(string.char(104,116,116,112,115,58,47,47,114,97,119,46,103,105,116,104,117,98,117,115,101,114,99,111,110,116,101,110,116,46,99,111,109,47,70,111,111,116,97,103,101,115,117,115,47,87,105,110,100,85,73,47,109,97,105,110,47,100,105,115,116,47,109,97,105,110,46,108,117,97)))()end)
-if not _1 or not _0 then
-_1,_2=pcall(function()_0=loadstring(game:HttpGet(string.char(104,116,116,112,115,58,47,47,103,105,116,104,117,98,46,99,111,109,47,70,111,111,116,97,103,101,115,117,115,47,87,105,110,100,85,73,47,114,101,108,101,97,115,101,115,47,100,111,119,110,108,111,97,100,47,49,46,54,46,54,54,47,109,97,105,110,46,108,117,97)))()end)
+local WindUI
+local ok, err = pcall(function()
+	WindUI = loadstring(game:HttpGet("https://raw.githubusercontent.com/Footagesus/WindUI/main/dist/main.lua"))()
+end)
+
+if not ok or not WindUI then
+	ok, err = pcall(function()
+		WindUI = loadstring(game:HttpGet("https://github.com/Footagesus/WindUI/releases/download/1.6.66/main.lua"))()
+	end)
 end
-if not _1 or not _0 then return end
 
-local _3=game:GetService(string.char(80,108,97,121,101,114,115))
-local _4=game:GetService(string.char(82,117,110,83,101,114,118,105,99,101))
-local _5=game:GetService(string.char(85,115,101,114,73,110,112,117,116,83,101,114,118,105,99,101))
-local _6=game:GetService(string.char(86,105,114,116,117,97,108,73,110,112,117,116,77,97,110,97,103,101,114))
-local _7=game:GetService(string.char(87,111,114,107,115,112,97,99,101))
-local _8=_3.LocalPlayer
-local _9=_7.CurrentCamera
+if not ok or not WindUI then
+	return
+end
 
-local _a=_0:CreateWindow({
-Title=string.char(83,107,121,76,105,110,103),
-Author=string.char(98,121,32,83,107,121,98,111),
-Folder=string.char(83,107,121,76,105,110,103),
-Icon=string.char(116,97,114,103,101,116),
-Theme=string.char(68,97,114,107),
-Size=UDim2.fromOffset(560,400),
-ToggleKey=Enum.KeyCode.RightShift,
-Transparent=true,
-Resizable=true,
-SideBarWidth=150
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local VirtualInputManager = game:GetService("VirtualInputManager")
+local Workspace = game:GetService("Workspace")
+local LocalPlayer = Players.LocalPlayer
+local camera = Workspace.CurrentCamera
+
+local Window = WindUI:CreateWindow({
+	Title = "SkyLing",
+	Author = "by Skybo",
+	Folder = "SkyLing",
+	Icon = "target",
+	Theme = "Dark",
+	Size = UDim2.fromOffset(560, 400),
+	ToggleKey = Enum.KeyCode.RightShift,
+	Transparent = true,
+	Resizable = true,
+	SideBarWidth = 150,
 })
 
-local _b={reach=7,targetBall=string.char(84,80,83),isActive=false}
+local ReachConfig = {
+	reach = 7,
+	targetBall = "TPS",
+	isActive = false,
+}
 
-local function _c(_d)
-local _e={}
-for _,_f in ipairs(_7:GetDescendants())do
-if _f:IsA(string.char(66,97,115,101,80,97,114,116))and _f.Name==_d then table.insert(_e,_f)end
-end
-return _e
-end
-
-local function _g()
-local _h=_8.Character
-if not _h then return{}end
-local _i={}
-for _,_j in ipairs({string.char(82,105,103,104,116,32,76,101,103),string.char(76,101,102,116,32,76,101,103),string.char(82,105,103,104,116,32,65,114,109),string.char(76,101,102,116,32,65,114,109),string.char(82,105,103,104,116,32,72,97,110,100),string.char(76,101,102,116,32,72,97,110,100)})do
-local _k=_h:FindFirstChild(_j)
-if _k then table.insert(_i,_k)end
-end
-return _i
+local function findAllTargetBalls(name)
+	local balls = {}
+	for _, v in ipairs(Workspace:GetDescendants()) do
+		if v:IsA("BasePart") and v.Name == name then
+			table.insert(balls, v)
+		end
+	end
+	return balls
 end
 
-_4.RenderStepped:Connect(function()
-if not _b.isActive then return end
-local _h=_8.Character
-if not _h then return end
-local _l=_h:FindFirstChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
-if not _l then return end
-local _m=_c(_b.targetBall)
-if #_m==0 then return end
-local _n=_g()
-if #_n==0 then return end
-for _,_o in ipairs(_m)do
-if _o and _o.Parent and(_o.Position-_l.Position).Magnitude<=_b.reach then
-for _,_p in ipairs(_n)do
-pcall(function()
-for _q=1,5 do
-firetouchinterest(_o,_p,0)
-task.wait(0.0001)
-firetouchinterest(_o,_p,1)
-task.wait(0.0001)
-end
-end)
-end
-end
-end
-end)
-
-local _r,_s=nil,{}
-
-local function _t()
-for _,_u in ipairs(_s)do pcall(function()_u:Disconnect()end)end
-table.clear(_s)
-if _r then _r:Destroy()_r=nil end
-pcall(function()require(_8.PlayerScripts:WaitForChild(string.char(80,108,97,121,101,114,77,111,100,117,108,101))):GetControls():Enable()end)
+local function getLimbs()
+	local char = LocalPlayer.Character
+	if not char then
+		return {}
+	end
+	local limbs = {}
+	for _, n in ipairs({"Right Leg", "Left Leg", "Right Arm", "Left Arm", "Right Hand", "Left Hand"}) do
+		local p = char:FindFirstChild(n)
+		if p then
+			table.insert(limbs, p)
+		end
+	end
+	return limbs
 end
 
-local function _v()
-if _r then _t()end
-pcall(function()require(_8.PlayerScripts:WaitForChild(string.char(80,108,97,121,101,114,77,111,100,117,108,101))):GetControls():Disable()end)
-local _w=Instance.new(string.char(83,99,114,101,101,110,71,117,105))
-_w.Name=string.char(77,111,98,105,108,101,75,101,121,98,105,110,100,71,117,105)
-_w.ResetOnSpawn=false
-_w.IgnoreGuiInset=true
-_w.DisplayOrder=999
-_w.Parent=_8:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))
-_r=_w
-local _x={{name=string.char(82),key=Enum.KeyCode.R},{name=string.char(84),key=Enum.KeyCode.T}}
-local function _y(_z)
-local _A,_B,_C,_D
-table.insert(_s,_z.InputBegan:Connect(function(_E)
-if _E.UserInputType==Enum.UserInputType.MouseButton1 or _E.UserInputType==Enum.UserInputType.Touch then
-_A=true
-_C=_E.Position
-_D=_z.Position
-local _F
-_F=_E.Changed:Connect(function()
-if _E.UserInputState==Enum.UserInputState.End then _A=false _F:Disconnect()end
-end)
-end
-end))
-table.insert(_s,_z.InputChanged:Connect(function(_E)
-if _E.UserInputType==Enum.UserInputType.MouseMovement or _E.UserInputType==Enum.UserInputType.Touch then _B=_E end
-end))
-table.insert(_s,_5.InputChanged:Connect(function(_E)
-if _E==_B and _A then
-local _G=_E.Position-_C
-_z.Position=UDim2.new(_D.X.Scale,_D.X.Offset+_G.X,_D.Y.Scale,_D.Y.Offset+_G.Y)
-end
-end))
-end
-for _H,_I in ipairs(_x)do
-local _z=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
-_z.Size=UDim2.new(0,60,0,60)
-_z.Position=UDim2.new(1,-90,1,-220-((_H-1)*75))
-_z.BackgroundColor3=Color3.fromRGB(30,30,30)
-_z.BackgroundTransparency=0.3
-_z.Text=_I.name
-_z.TextColor3=Color3.new(1,1,1)
-_z.TextScaled=true
-_z.Font=Enum.Font.GothamBold
-_z.AutoButtonColor=false
-_z.Parent=_w
-Instance.new(string.char(85,73,67,111,114,110,101,114),_z).CornerRadius=UDim.new(1,0)
-_y(_z)
-local _J,_K,_L=false,false,Vector2.zero
-table.insert(_s,_z.InputBegan:Connect(function(_E)
-if _E.UserInputType==Enum.UserInputType.MouseButton1 or _E.UserInputType==Enum.UserInputType.Touch then
-_K=false
-_L=_E.Position
-end
-end))
-table.insert(_s,_z.InputChanged:Connect(function(_E)
-if(_E.UserInputType==Enum.UserInputType.MouseMovement or _E.UserInputType==Enum.UserInputType.Touch)and(_E.Position-_L).Magnitude>8 then _K=true end
-end))
-table.insert(_s,_z.MouseButton1Click:Connect(function()
-if _K then return end
-if _J then
-_J=false
-_z.BackgroundColor3=Color3.fromRGB(30,30,30)
-_6:SendKeyEvent(false,_I.key,false,game)
-else
-_J=true
-_z.BackgroundColor3=Color3.fromRGB(0,170,255)
-_6:SendKeyEvent(true,_I.key,false,game)
-end
-end))
-end
-local _M=Instance.new(string.char(73,109,97,103,101,66,117,116,116,111,110))
-_M.Size=UDim2.new(0,70,0,70)
-_M.Position=UDim2.new(1,-100,1,-95)
-_M.BackgroundTransparency=1
-_M.Image=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,50,48,57,55,54,52,56,49,54,55,55,55,54,51)
-_M.Parent=_w
-local _N,_O=false,nil
-local function _P(_h)_O=_h:WaitForChild(string.char(72,117,109,97,110,111,105,100))end
-if _8.Character then _P(_8.Character)end
-table.insert(_s,_8.CharacterAdded:Connect(_P))
-table.insert(_s,_4.RenderStepped:Connect(function()if _N and _O then _O.Jump=true end end))
-table.insert(_s,_M.MouseButton1Down:Connect(function()_N=true _M.ImageColor3=Color3.fromRGB(150,150,150)end))
-table.insert(_s,_M.MouseButton1Up:Connect(function()_N=false _M.ImageColor3=Color3.new(1,1,1)end))
-local _Q,_R=45,220
-local _S=Instance.new(string.char(70,114,97,109,101))
-_S.Size=UDim2.new(0,_R,0,_R)
-_S.Position=UDim2.new(0,20,1,-20-_R)
-_S.BackgroundTransparency=1
-_S.Active=true
-_S.Parent=_w
-local _T=Instance.new(string.char(70,114,97,109,101))
-_T.Size=UDim2.new(0,34,0,34)
-_T.AnchorPoint=Vector2.new(0.5,0.5)
-_T.Position=UDim2.new(0.5,0,0.5,0)
-_T.BackgroundColor3=Color3.new(0,0,0)
-_T.BackgroundTransparency=0.35
-_T.Parent=_S
-Instance.new(string.char(85,73,67,111,114,110,101,114),_T).CornerRadius=UDim.new(1,0)
-local _U,_V,_W,_X=false,nil,Vector3.zero,nil
-local function _Y(_h)_X=_h:WaitForChild(string.char(72,117,109,97,110,111,105,100))end
-if _8.Character then _Y(_8.Character)end
-table.insert(_s,_8.CharacterAdded:Connect(_Y))
-table.insert(_s,_S.InputBegan:Connect(function(_E,_Z)
-if _Z then return end
-if _E.UserInputType==Enum.UserInputType.Touch or _E.UserInputType==Enum.UserInputType.MouseButton1 then
-_U=true
-_V=_E
-end
-end))
-table.insert(_s,_5.InputChanged:Connect(function(_E)
-if _U and _E==_V then
-local __=_S.AbsolutePosition+_S.AbsoluteSize/2
-local _aa=Vector2.new(_E.Position.X,_E.Position.Y)-__
-local _ab=_aa.Magnitude
-local _ac=_ab>_Q and _aa.Unit*_Q or _aa
-_T.Position=UDim2.new(0.5,_ac.X,0.5,_ac.Y)
-local _ad=_ab>0 and(_ac/_Q)or Vector2.zero
-_W=Vector3.new(_ad.X,0,_ad.Y)
-end
-end))
-table.insert(_s,_5.InputEnded:Connect(function(_E)
-if _U and _E==_V then
-_U=false
-_V=nil
-_T.Position=UDim2.new(0.5,0,0.5,0)
-_W=Vector3.zero
-end
-end))
-table.insert(_s,_4.RenderStepped:Connect(function()
-if not _X then return end
-if _W.Magnitude>0.05 then
-local _ae=_7.CurrentCamera.CFrame
-local _af=Vector3.new(_ae.LookVector.X,0,_ae.LookVector.Z)
-if _af.Magnitude>0 then _af=_af.Unit end
-local _ag=Vector3.new(_ae.RightVector.X,0,_ae.RightVector.Z)
-if _ag.Magnitude>0 then _ag=_ag.Unit end
-local _ah=_ag*_W.X+_af*-_W.Z
-if _ah.Magnitude>0 then _X:Move(_ah,false)end
-else
-_X:Move(Vector3.zero,false)
-end
-end))
-end
-
-local _ai={ActivationDistance=20,ClickInterval=0.1,TargetName=string.char(84,80,83),ToggleKey=Enum.KeyCode.R,ActionKey=string.char(70),isActive=false}
-local _aj,_ak=nil,nil
-local function _al(_h)
-_ak=_h:WaitForChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
-if _ai.isActive then
-_ai.isActive=false
-if _aj then _aj:Disconnect()_aj=nil end
-end
-end
-if _8.Character then _al(_8.Character)end
-_8.CharacterAdded:Connect(_al)
-local function _am(_an)
-_ai.isActive=_an
-if _an then
-if _aj then _aj:Disconnect()end
-_aj=_4.Heartbeat:Connect(function()
-if not _ai.isActive or not _ak then return end
-for _,_ao in pairs(_7:GetChildren())do
-if _ao.Name==_ai.TargetName and _ao:IsA(string.char(66,97,115,101,80,97,114,116))then
-if(_ao.Position-_ak.Position).Magnitude<=_ai.ActivationDistance then
-_6:SendKeyEvent(true,_ai.ActionKey,false,game)
-task.wait(_ai.ClickInterval)
-_6:SendKeyEvent(false,_ai.ActionKey,false,game)
-break
-end
-end
-end
-end)
-else
-if _aj then _aj:Disconnect()_aj=nil end
-end
-end
-_5.InputBegan:Connect(function(_E,_Z)
-if _Z then return end
-if _E.KeyCode==_ai.ToggleKey then _am(not _ai.isActive)end
+RunService.RenderStepped:Connect(function()
+	if not ReachConfig.isActive then
+		return
+	end
+	local char = LocalPlayer.Character
+	if not char then
+		return
+	end
+	local hrp = char:FindFirstChild("HumanoidRootPart")
+	if not hrp then
+		return
+	end
+	local balls = findAllTargetBalls(ReachConfig.targetBall)
+	if #balls == 0 then
+		return
+	end
+	local limbs = getLimbs()
+	if #limbs == 0 then
+		return
+	end
+	for _, ball in ipairs(balls) do
+		if ball and ball.Parent then
+			if (ball.Position - hrp.Position).Magnitude <= ReachConfig.reach then
+				for _, limb in ipairs(limbs) do
+					pcall(function()
+						for i = 1, 5 do
+							firetouchinterest(ball, limb, 0)
+							task.wait(0.0001)
+							firetouchinterest(ball, limb, 1)
+							task.wait(0.0001)
+						end
+					end)
+				end
+			end
+		end
+	end
 end)
 
-local _ap,_aq=nil,{}
-local _ar,_as,_at,_au=false,nil,nil,nil
-local _av,_aw,_ax=70,16,6
-local _ay,_az=0.004,0.006
-local _aA,_aB=0,0.2
-local _aC,_aD=_9.CameraType,_9.CameraSubject
+local TotGui, TotConnections = nil, {}
 
-local function _aE()
-_ar=false
-if _at then _at:Disconnect()_at=nil end
-if _au then _au:Disconnect()_au=nil end
-_9.CameraType=_aC
-_9.CameraSubject=_aD
-if _ap then
-local _aF=_ap:FindFirstChild(string.char(83,107,121,76,105,110,103))
-if _aF then
-_aF.BackgroundColor3=Color3.fromRGB(137,207,240)
-_aF.Text=string.char(83,107,121,76,105,110,103)
-end
-end
-_as=nil
+local function destroyTot()
+	for _, c in ipairs(TotConnections) do
+		pcall(function()
+			c:Disconnect()
+		end)
+	end
+	table.clear(TotConnections)
+	if TotGui then
+		TotGui:Destroy()
+		TotGui = nil
+	end
+	pcall(function()
+		require(LocalPlayer.PlayerScripts:WaitForChild("PlayerModule")):GetControls():Enable()
+	end)
 end
 
-local function _aG()
-_aE()
-for _,_u in ipairs(_aq)do pcall(function()_u:Disconnect()end)end
-table.clear(_aq)
-if _ap then _ap:Destroy()_ap=nil end
+local function createTot()
+	if TotGui then
+		destroyTot()
+	end
+	pcall(function()
+		require(LocalPlayer.PlayerScripts:WaitForChild("PlayerModule")):GetControls():Disable()
+	end)
+
+	local gui = Instance.new("ScreenGui")
+	gui.Name = "MobileKeybindGui"
+	gui.ResetOnSpawn = false
+	gui.IgnoreGuiInset = true
+	gui.DisplayOrder = 999
+	gui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+	TotGui = gui
+
+	local KEYS = {
+		{ name = "R", key = Enum.KeyCode.R },
+		{ name = "T", key = Enum.KeyCode.T },
+	}
+
+	local function makeDraggable(btn)
+		local dragging, dragInput, dragStart, startPos
+		table.insert(TotConnections, btn.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				dragging = true
+				dragStart = input.Position
+				startPos = btn.Position
+				local c
+				c = input.Changed:Connect(function()
+					if input.UserInputState == Enum.UserInputState.End then
+						dragging = false
+						c:Disconnect()
+					end
+				end)
+			end
+		end))
+		table.insert(TotConnections, btn.InputChanged:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+				dragInput = input
+			end
+		end))
+		table.insert(TotConnections, UserInputService.InputChanged:Connect(function(input)
+			if input == dragInput and dragging then
+				local d = input.Position - dragStart
+				btn.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + d.X, startPos.Y.Scale, startPos.Y.Offset + d.Y)
+			end
+		end))
+	end
+
+	for i, data in ipairs(KEYS) do
+		local btn = Instance.new("TextButton")
+		btn.Size = UDim2.new(0, 60, 0, 60)
+		btn.Position = UDim2.new(1, -90, 1, -220 - ((i - 1) * 75))
+		btn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+		btn.BackgroundTransparency = 0.3
+		btn.Text = data.name
+		btn.TextColor3 = Color3.new(1, 1, 1)
+		btn.TextScaled = true
+		btn.Font = Enum.Font.GothamBold
+		btn.AutoButtonColor = false
+		btn.Parent = gui
+		Instance.new("UICorner", btn).CornerRadius = UDim.new(1, 0)
+		makeDraggable(btn)
+
+		local held, moved, pressStart = false, false, Vector2.zero
+		table.insert(TotConnections, btn.InputBegan:Connect(function(input)
+			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+				moved = false
+				pressStart = input.Position
+			end
+		end))
+		table.insert(TotConnections, btn.InputChanged:Connect(function(input)
+			if (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) and (input.Position - pressStart).Magnitude > 8 then
+				moved = true
+			end
+		end))
+		table.insert(TotConnections, btn.MouseButton1Click:Connect(function()
+			if moved then
+				return
+			end
+			if held then
+				held = false
+				btn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+				VirtualInputManager:SendKeyEvent(false, data.key, false, game)
+			else
+				held = true
+				btn.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+				VirtualInputManager:SendKeyEvent(true, data.key, false, game)
+			end
+		end))
+	end
+
+	local jumpBtn = Instance.new("ImageButton")
+	jumpBtn.Size = UDim2.new(0, 70, 0, 70)
+	jumpBtn.Position = UDim2.new(1, -100, 1, -95)
+	jumpBtn.BackgroundTransparency = 1
+	jumpBtn.Image = "rbxassetid://120976481677763"
+	jumpBtn.Parent = gui
+
+	local jumpHeld, jumpHum = false, nil
+	local function bindJump(char)
+		jumpHum = char:WaitForChild("Humanoid")
+	end
+	if LocalPlayer.Character then
+		bindJump(LocalPlayer.Character)
+	end
+	table.insert(TotConnections, LocalPlayer.CharacterAdded:Connect(bindJump))
+	table.insert(TotConnections, RunService.RenderStepped:Connect(function()
+		if jumpHeld and jumpHum then
+			jumpHum.Jump = true
+		end
+	end))
+	table.insert(TotConnections, jumpBtn.MouseButton1Down:Connect(function()
+		jumpHeld = true
+		jumpBtn.ImageColor3 = Color3.fromRGB(150, 150, 150)
+	end))
+	table.insert(TotConnections, jumpBtn.MouseButton1Up:Connect(function()
+		jumpHeld = false
+		jumpBtn.ImageColor3 = Color3.new(1, 1, 1)
+	end))
+
+	local joyR, joySize = 45, 220
+	local zone = Instance.new("Frame")
+	zone.Size = UDim2.new(0, joySize, 0, joySize)
+	zone.Position = UDim2.new(0, 20, 1, -20 - joySize)
+	zone.BackgroundTransparency = 1
+	zone.Active = true
+	zone.Parent = gui
+
+	local thumb = Instance.new("Frame")
+	thumb.Size = UDim2.new(0, 34, 0, 34)
+	thumb.AnchorPoint = Vector2.new(0.5, 0.5)
+	thumb.Position = UDim2.new(0.5, 0, 0.5, 0)
+	thumb.BackgroundColor3 = Color3.new(0, 0, 0)
+	thumb.BackgroundTransparency = 0.35
+	thumb.Parent = zone
+	Instance.new("UICorner", thumb).CornerRadius = UDim.new(1, 0)
+
+	local joyActive, joyId, moveDir, hum = false, nil, Vector3.zero, nil
+	local function bindHum(char)
+		hum = char:WaitForChild("Humanoid")
+	end
+	if LocalPlayer.Character then
+		bindHum(LocalPlayer.Character)
+	end
+	table.insert(TotConnections, LocalPlayer.CharacterAdded:Connect(bindHum))
+
+	table.insert(TotConnections, zone.InputBegan:Connect(function(input, gp)
+		if gp then
+			return
+		end
+		if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
+			joyActive = true
+			joyId = input
+		end
+	end))
+	table.insert(TotConnections, UserInputService.InputChanged:Connect(function(input)
+		if joyActive and input == joyId then
+			local center = zone.AbsolutePosition + zone.AbsoluteSize / 2
+			local delta = Vector2.new(input.Position.X, input.Position.Y) - center
+			local dist = delta.Magnitude
+			local clamped = dist > joyR and delta.Unit * joyR or delta
+			thumb.Position = UDim2.new(0.5, clamped.X, 0.5, clamped.Y)
+			local n = dist > 0 and (clamped / joyR) or Vector2.zero
+			moveDir = Vector3.new(n.X, 0, n.Y)
+		end
+	end))
+	table.insert(TotConnections, UserInputService.InputEnded:Connect(function(input)
+		if joyActive and input == joyId then
+			joyActive = false
+			joyId = nil
+			thumb.Position = UDim2.new(0.5, 0, 0.5, 0)
+			moveDir = Vector3.zero
+		end
+	end))
+	table.insert(TotConnections, RunService.RenderStepped:Connect(function()
+		if not hum then
+			return
+		end
+		if moveDir.Magnitude > 0.05 then
+			local cam = Workspace.CurrentCamera.CFrame
+			local fwd = Vector3.new(cam.LookVector.X, 0, cam.LookVector.Z)
+			if fwd.Magnitude > 0 then
+				fwd = fwd.Unit
+			end
+			local right = Vector3.new(cam.RightVector.X, 0, cam.RightVector.Z)
+			if right.Magnitude > 0 then
+				right = right.Unit
+			end
+			local dir = right * moveDir.X + fwd * -moveDir.Z
+			if dir.Magnitude > 0 then
+				hum:Move(dir, false)
+			end
+		else
+			hum:Move(Vector3.zero, false)
+		end
+	end))
 end
 
-local function _aH()
-local _h=_8.Character
-if not _h then return nil end
-local _aI=_h:FindFirstChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
-if not _aI then return nil end
-local _aJ,_aK=nil,80
-for _,_ao in ipairs(_7:GetDescendants())do
-if _ao.Name==string.char(84,80,83)then
-local _aL
-if _ao:IsA(string.char(77,111,100,101,108))then
-_aL=_ao.PrimaryPart or _ao:FindFirstChildWhichIsA(string.char(66,97,115,101,80,97,114,116))
-elseif _ao:IsA(string.char(66,97,115,101,80,97,114,116))then
-_aL=_ao
+local AutoConfig = {
+	ActivationDistance = 20,
+	ClickInterval = 0.1,
+	TargetName = "TPS",
+	ToggleKey = Enum.KeyCode.R,
+	ActionKey = "F",
+	isActive = false,
+}
+local autoHB, autoRoot = nil, nil
+
+local function updateAuto(char)
+	autoRoot = char:WaitForChild("HumanoidRootPart")
+	if AutoConfig.isActive then
+		AutoConfig.isActive = false
+		if autoHB then
+			autoHB:Disconnect()
+			autoHB = nil
+		end
+	end
 end
-if _aL then
-local _aM=(_aL.Position-_aI.Position).Magnitude
-if _aM<_aK then _aK=_aM _aJ=_ao end
+if LocalPlayer.Character then
+	updateAuto(LocalPlayer.Character)
 end
-end
-end
-return _aJ
+LocalPlayer.CharacterAdded:Connect(updateAuto)
+
+local function setAuto(state)
+	AutoConfig.isActive = state
+	if state then
+		if autoHB then
+			autoHB:Disconnect()
+		end
+		autoHB = RunService.Heartbeat:Connect(function()
+			if not AutoConfig.isActive or not autoRoot then
+				return
+			end
+			for _, obj in pairs(Workspace:GetChildren()) do
+				if obj.Name == AutoConfig.TargetName and obj:IsA("BasePart") then
+					if (obj.Position - autoRoot.Position).Magnitude <= AutoConfig.ActivationDistance then
+						VirtualInputManager:SendKeyEvent(true, AutoConfig.ActionKey, false, game)
+						task.wait(AutoConfig.ClickInterval)
+						VirtualInputManager:SendKeyEvent(false, AutoConfig.ActionKey, false, game)
+						break
+					end
+				end
+			end
+		end)
+	else
+		if autoHB then
+			autoHB:Disconnect()
+			autoHB = nil
+		end
+	end
 end
 
-local function _aN(_aO)
-local _aL
-if _aO:IsA(string.char(77,111,100,101,108))then
-_aL=_aO.PrimaryPart or _aO:FindFirstChildWhichIsA(string.char(66,97,115,101,80,97,114,116))
-else
-_aL=_aO
-end
-if not _aL then return end
-_as=_aL
-_ar=true
-if _ap then
-local _aF=_ap:FindFirstChild(string.char(83,107,121,76,105,110,103))
-if _aF then
-_aF.BackgroundColor3=Color3.fromRGB(80,180,220)
-_aF.Text=string.char(65,99,116,105,118,101)
-end
-end
-local _aP=_9.CFrame.LookVector
-_aA=math.atan2(-_aP.X,-_aP.Z)
-_aB=math.asin(math.clamp(_aP.Y,-1,1))
-_9.CameraType=Enum.CameraType.Scriptable
-_au=_5.InputChanged:Connect(function(_E,_aQ)
-if _aQ or not _ar then return end
-if _E.UserInputType==Enum.UserInputType.MouseMovement then
-_aA=_aA-_E.Delta.X*_ay
-_aB=math.clamp(_aB-_E.Delta.Y*_ay,-1.2,1.2)
-elseif _E.UserInputType==Enum.UserInputType.Touch then
-_aA=_aA-_E.Delta.X*_az
-_aB=math.clamp(_aB-_E.Delta.Y*_az,-1.2,1.2)
-end
+UserInputService.InputBegan:Connect(function(input, gp)
+	if gp then
+		return
+	end
+	if input.KeyCode == AutoConfig.ToggleKey then
+		setAuto(not AutoConfig.isActive)
+	end
 end)
-_at=_4.RenderStepped:Connect(function()
-if not _ar or not _as or not _as.Parent then
-_aE()
-return
+
+local CBGui, CBConnections = nil, {}
+local controlling, controlledPart, controlConn, inputConn = false, nil, nil, nil
+local SPEED, CAM_DIST, CAM_H = 70, 16, 6
+local M_SENS, T_SENS = 0.004, 0.006
+local yaw, pitch = 0, 0.2
+local oldCamType, oldCamSub = camera.CameraType, camera.CameraSubject
+
+local function stopControl()
+	controlling = false
+	if controlConn then
+		controlConn:Disconnect()
+		controlConn = nil
+	end
+	if inputConn then
+		inputConn:Disconnect()
+		inputConn = nil
+	end
+	camera.CameraType = oldCamType
+	camera.CameraSubject = oldCamSub
+	if CBGui then
+		local b = CBGui:FindFirstChild("SkyLing")
+		if b then
+			b.BackgroundColor3 = Color3.fromRGB(137, 207, 240)
+			b.Text = "SkyLing"
+		end
+	end
+	controlledPart = nil
 end
-local _ah=CFrame.fromEulerAnglesYXZ(_aB,_aA,0).LookVector
-pcall(function()
-_as.AssemblyLinearVelocity=_ah*_av
-_as.AssemblyAngularVelocity=Vector3.zero
+
+local function destroyControlBall()
+	stopControl()
+	for _, c in ipairs(CBConnections) do
+		pcall(function()
+			c:Disconnect()
+		end)
+	end
+	table.clear(CBConnections)
+	if CBGui then
+		CBGui:Destroy()
+		CBGui = nil
+	end
+end
+
+local function getClosestTPS()
+	local char = LocalPlayer.Character
+	if not char then
+		return nil
+	end
+	local root = char:FindFirstChild("HumanoidRootPart")
+	if not root then
+		return nil
+	end
+	local closest, dist = nil, 80
+	for _, obj in ipairs(Workspace:GetDescendants()) do
+		if obj.Name == "TPS" then
+			local part
+			if obj:IsA("Model") then
+				part = obj.PrimaryPart or obj:FindFirstChildWhichIsA("BasePart")
+			elseif obj:IsA("BasePart") then
+				part = obj
+			end
+			if part then
+				local d = (part.Position - root.Position).Magnitude
+				if d < dist then
+					dist = d
+					closest = obj
+				end
+			end
+		end
+	end
+	return closest
+end
+
+local function startControl(target)
+	local part
+	if target:IsA("Model") then
+		part = target.PrimaryPart or target:FindFirstChildWhichIsA("BasePart")
+	else
+		part = target
+	end
+	if not part then
+		return
+	end
+	controlledPart = part
+	controlling = true
+	if CBGui then
+		local b = CBGui:FindFirstChild("SkyLing")
+		if b then
+			b.BackgroundColor3 = Color3.fromRGB(80, 180, 220)
+			b.Text = "Active"
+		end
+	end
+	local look = camera.CFrame.LookVector
+	yaw = math.atan2(-look.X, -look.Z)
+	pitch = math.asin(math.clamp(look.Y, -1, 1))
+	camera.CameraType = Enum.CameraType.Scriptable
+
+	inputConn = UserInputService.InputChanged:Connect(function(input, processed)
+		if processed or not controlling then
+			return
+		end
+		if input.UserInputType == Enum.UserInputType.MouseMovement then
+			yaw = yaw - input.Delta.X * M_SENS
+			pitch = math.clamp(pitch - input.Delta.Y * M_SENS, -1.2, 1.2)
+		elseif input.UserInputType == Enum.UserInputType.Touch then
+			yaw = yaw - input.Delta.X * T_SENS
+			pitch = math.clamp(pitch - input.Delta.Y * T_SENS, -1.2, 1.2)
+		end
+	end)
+
+	controlConn = RunService.RenderStepped:Connect(function()
+		if not controlling or not controlledPart or not controlledPart.Parent then
+			stopControl()
+			return
+		end
+		local dir = CFrame.fromEulerAnglesYXZ(pitch, yaw, 0).LookVector
+		pcall(function()
+			controlledPart.AssemblyLinearVelocity = dir * SPEED
+			controlledPart.AssemblyAngularVelocity = Vector3.zero
+		end)
+		local camPos = controlledPart.Position - dir * CAM_DIST + Vector3.new(0, CAM_H, 0)
+		camera.CFrame = CFrame.lookAt(camPos, controlledPart.Position + Vector3.new(0, 1.5, 0))
+	end)
+end
+
+local function createControlBall()
+	if CBGui then
+		destroyControlBall()
+	end
+	local old = LocalPlayer.PlayerGui:FindFirstChild("SkyLing")
+	if old then
+		old:Destroy()
+	end
+
+	local gui = Instance.new("ScreenGui")
+	gui.Name = "SkyLing"
+	gui.ResetOnSpawn = false
+	gui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+	CBGui = gui
+
+	local btn = Instance.new("TextButton")
+	btn.Name = "SkyLing"
+	btn.Size = UDim2.new(0, 150, 0, 55)
+	btn.Position = UDim2.new(0.5, -75, 0.5, -27)
+	btn.BackgroundColor3 = Color3.fromRGB(137, 207, 240)
+	btn.TextColor3 = Color3.new(1, 1, 1)
+	btn.Text = "SkyLing"
+	btn.Font = Enum.Font.GothamBold
+	btn.TextSize = 18
+	btn.AutoButtonColor = false
+	btn.Parent = gui
+	Instance.new("UICorner", btn).CornerRadius = UDim.new(0, 12)
+
+	local dragging, dragStart, startPos, totalDrag = false, nil, nil, 0
+	table.insert(CBConnections, btn.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = btn.Position
+			totalDrag = 0
+		end
+	end))
+	table.insert(CBConnections, btn.InputChanged:Connect(function(input)
+		if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
+			local d = input.Position - dragStart
+			totalDrag = totalDrag + d.Magnitude
+			btn.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + d.X, startPos.Y.Scale, startPos.Y.Offset + d.Y)
+			dragStart = input.Position
+			startPos = btn.Position
+		end
+	end))
+	table.insert(CBConnections, btn.InputEnded:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = false
+			if totalDrag < 15 then
+				if controlling then
+					stopControl()
+				else
+					local found = getClosestTPS()
+					if found then
+						startControl(found)
+					end
+				end
+			end
+		end
+	end))
+end
+
+local PredictEnabled = false
+local PredictionTime = 0.35
+local TPS = nil
+
+local Line = Drawing.new("Line")
+Line.Visible = false
+Line.Thickness = 2
+Line.Transparency = 1
+Line.Color = Color3.fromRGB(255, 60, 60)
+
+local Dot = Drawing.new("Circle")
+Dot.Visible = false
+Dot.Filled = true
+Dot.Radius = 6
+Dot.Transparency = 1
+Dot.Color = Color3.fromRGB(255, 60, 60)
+
+local function FindTPS()
+	for _, obj in ipairs(Workspace:GetDescendants()) do
+		if obj.Name == "TPS" and obj:IsA("BasePart") then
+			return obj
+		end
+	end
+	return nil
+end
+
+RunService.RenderStepped:Connect(function()
+	if not PredictEnabled then
+		Line.Visible = false
+		Dot.Visible = false
+		return
+	end
+	if not TPS or not TPS.Parent then
+		TPS = FindTPS()
+	end
+	if not TPS then
+		Line.Visible = false
+		Dot.Visible = false
+		return
+	end
+	local velocity = TPS.AssemblyLinearVelocity
+	local predictedPosition = TPS.Position + velocity * PredictionTime
+	local currentPos, currentVisible = camera:WorldToViewportPoint(TPS.Position)
+	local predictedPos, predictedVisible = camera:WorldToViewportPoint(predictedPosition)
+	if currentVisible and predictedVisible then
+		Line.From = Vector2.new(currentPos.X, currentPos.Y)
+		Line.To = Vector2.new(predictedPos.X, predictedPos.Y)
+		Line.Visible = true
+		Dot.Position = Vector2.new(predictedPos.X, predictedPos.Y)
+		Dot.Visible = true
+	else
+		Line.Visible = false
+		Dot.Visible = false
+	end
 end)
-local _aR=_as.Position-_ah*_aw+Vector3.new(0,_ax,0)
-_9.CFrame=CFrame.lookAt(_aR,_as.Position+Vector3.new(0,1.5,0))
-end)
+
+local AutoBallGui = nil
+local AutoBallConnections = {}
+local isFollowing = false
+local followConnection = nil
+local targetPart = nil
+local originalWalkSpeed = 16
+local originalJumpPower = 50
+local autoBallChar = LocalPlayer.Character
+local autoBallHum = autoBallChar and autoBallChar:FindFirstChildOfClass("Humanoid")
+local autoBallRoot = autoBallChar and autoBallChar:FindFirstChild("HumanoidRootPart")
+
+local function stopFollowing()
+	if followConnection then
+		followConnection:Disconnect()
+		followConnection = nil
+	end
+	isFollowing = false
+	if AutoBallGui then
+		local btn = AutoBallGui:FindFirstChild("AutoFollowButton")
+		if btn then
+			btn.BackgroundColor3 = Color3.new(0, 0, 0)
+		end
+	end
+	if autoBallHum then
+		autoBallHum.WalkSpeed = originalWalkSpeed
+		autoBallHum.JumpPower = originalJumpPower
+		if autoBallRoot then
+			autoBallHum:MoveTo(autoBallRoot.Position)
+		end
+	end
 end
 
-local function _aS()
-if _ap then _aG()end
-local _aT=_8.PlayerGui:FindFirstChild(string.char(83,107,121,76,105,110,103))
-if _aT then _aT:Destroy()end
-local _w=Instance.new(string.char(83,99,114,101,101,110,71,117,105))
-_w.Name=string.char(83,107,121,76,105,110,103)
-_w.ResetOnSpawn=false
-_w.Parent=_8:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))
-_ap=_w
-local _z=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
-_z.Name=string.char(83,107,121,76,105,110,103)
-_z.Size=UDim2.new(0,150,0,55)
-_z.Position=UDim2.new(0.5,-75,0.5,-27)
-_z.BackgroundColor3=Color3.fromRGB(137,207,240)
-_z.TextColor3=Color3.new(1,1,1)
-_z.Text=string.char(83,107,121,76,105,110,103)
-_z.Font=Enum.Font.GothamBold
-_z.TextSize=18
-_z.AutoButtonColor=false
-_z.Parent=_w
-Instance.new(string.char(85,73,67,111,114,110,101,114),_z).CornerRadius=UDim.new(0,12)
-local _A,_C,_D,_aU=false,nil,nil,0
-table.insert(_aq,_z.InputBegan:Connect(function(_E)
-if _E.UserInputType==Enum.UserInputType.MouseButton1 or _E.UserInputType==Enum.UserInputType.Touch then
-_A=true
-_C=_E.Position
-_D=_z.Position
-_aU=0
-end
-end))
-table.insert(_aq,_z.InputChanged:Connect(function(_E)
-if _A and(_E.UserInputType==Enum.UserInputType.MouseMovement or _E.UserInputType==Enum.UserInputType.Touch)then
-local _G=_E.Position-_C
-_aU=_aU+_G.Magnitude
-_z.Position=UDim2.new(_D.X.Scale,_D.X.Offset+_G.X,_D.Y.Scale,_D.Y.Offset+_G.Y)
-_C=_E.Position
-_D=_z.Position
-end
-end))
-table.insert(_aq,_z.InputEnded:Connect(function(_E)
-if _E.UserInputType==Enum.UserInputType.MouseButton1 or _E.UserInputType==Enum.UserInputType.Touch then
-_A=false
-if _aU<15 then
-if _ar then _aE()else
-local _aV=_aH()
-if _aV then _aN(_aV)end
-end
-end
-end
-end))
-end
-
-local _aW=false
-local _aX=0.35
-local _aY=nil
-local _aZ=Drawing.new(string.char(76,105,110,101))
-_aZ.Visible=false
-_aZ.Thickness=2
-_aZ.Transparency=1
-_aZ.Color=Color3.fromRGB(255,60,60)
-local _b0=Drawing.new(string.char(67,105,114,99,108,101))
-_b0.Visible=false
-_b0.Filled=true
-_b0.Radius=6
-_b0.Transparency=1
-_b0.Color=Color3.fromRGB(255,60,60)
-
-local function _b1()
-for _,_ao in ipairs(_7:GetDescendants())do
-if _ao.Name==string.char(84,80,83)and _ao:IsA(string.char(66,97,115,101,80,97,114,116))then return _ao end
-end
-return nil
+local function startFollowing()
+	if not targetPart or not targetPart.Parent then
+		return
+	end
+	if isFollowing then
+		stopFollowing()
+		return
+	end
+	isFollowing = true
+	if AutoBallGui then
+		local btn = AutoBallGui:FindFirstChild("AutoFollowButton")
+		if btn then
+			btn.BackgroundColor3 = Color3.new(0.3, 0.3, 0.3)
+		end
+	end
+	if autoBallHum then
+		originalWalkSpeed = autoBallHum.WalkSpeed
+		originalJumpPower = autoBallHum.JumpPower
+	end
+	local lastMoveTime = tick()
+	local stuckCounter = 0
+	followConnection = RunService.Heartbeat:Connect(function()
+		if not targetPart or not targetPart.Parent then
+			stopFollowing()
+			return
+		end
+		if not autoBallChar or not autoBallChar.Parent then
+			stopFollowing()
+			return
+		end
+		if not autoBallHum or not autoBallRoot then
+			return
+		end
+		local targetPosition = targetPart.Position
+		local currentPosition = autoBallRoot.Position
+		local distance = (targetPosition - currentPosition).Magnitude
+		if distance > 0.5 then
+			autoBallHum:MoveTo(targetPosition)
+			local currentTime = tick()
+			if currentTime - lastMoveTime > 0.5 then
+				local newPos = autoBallRoot.Position
+				if (newPos - currentPosition).Magnitude < 0.1 then
+					stuckCounter = stuckCounter + 1
+					if stuckCounter > 3 then
+						autoBallHum.Jump = true
+						stuckCounter = 0
+					end
+				else
+					stuckCounter = 0
+				end
+				lastMoveTime = currentTime
+			end
+			autoBallHum.WalkSpeed = originalWalkSpeed
+		else
+			autoBallHum:MoveTo(targetPosition + Vector3.new(1, 0, 1))
+			autoBallHum.WalkSpeed = originalWalkSpeed
+		end
+	end)
 end
 
-_4.RenderStepped:Connect(function()
-if not _aW then
-_aZ.Visible=false
-_b0.Visible=false
-return
-end
-if not _aY or not _aY.Parent then
-_aY=_b1()
-end
-if not _aY then
-_aZ.Visible=false
-_b0.Visible=false
-return
-end
-local _b2=_aY.AssemblyLinearVelocity
-local _b3=_aY.Position+_b2*_aX
-local _b4,_b5=_9:WorldToViewportPoint(_aY.Position)
-local _b6,_b7=_9:WorldToViewportPoint(_b3)
-if _b5 and _b7 then
-_aZ.From=Vector2.new(_b4.X,_b4.Y)
-_aZ.To=Vector2.new(_b6.X,_b6.Y)
-_aZ.Visible=true
-_b0.Position=Vector2.new(_b6.X,_b6.Y)
-_b0.Visible=true
-else
-_aZ.Visible=false
-_b0.Visible=false
-end
-end)
-
-local _b8=nil
-local _b9={}
-local _ba=false
-local _bb=nil
-local _bc=nil
-local _bd=16
-local _be=50
-local _bf=_8.Character
-local _bg=_bf and _bf:FindFirstChildOfClass(string.char(72,117,109,97,110,111,105,100))
-local _bh=_bf and _bf:FindFirstChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
-
-local function _bi()
-if _bb then _bb:Disconnect()_bb=nil end
-_ba=false
-if _b8 then
-local _bj=_b8:FindFirstChild(string.char(65,117,116,111,70,111,108,108,111,119,66,117,116,116,111,110))
-if _bj then _bj.BackgroundColor3=Color3.new(0,0,0)end
-end
-if _bg then
-_bg.WalkSpeed=_bd
-_bg.JumpPower=_be
-if _bh then _bg:MoveTo(_bh.Position)end
-end
+local function destroyAutoBall()
+	stopFollowing()
+	for _, c in ipairs(AutoBallConnections) do
+		pcall(function()
+			c:Disconnect()
+		end)
+	end
+	table.clear(AutoBallConnections)
+	if AutoBallGui then
+		AutoBallGui:Destroy()
+		AutoBallGui = nil
+	end
+	targetPart = nil
 end
 
-local function _bk()
-if not _bc or not _bc.Parent then return end
-if _ba then
-_bi()
-return
-end
-_ba=true
-if _b8 then
-local _bj=_b8:FindFirstChild(string.char(65,117,116,111,70,111,108,108,111,119,66,117,116,116,111,110))
-if _bj then _bj.BackgroundColor3=Color3.new(0.3,0.3,0.3)end
-end
-if _bg then
-_bd=_bg.WalkSpeed
-_be=_bg.JumpPower
-end
-local _bl=tick()
-local _bm=0
-_bb=_4.Heartbeat:Connect(function()
-if not _bc or not _bc.Parent then
-_bi()
-return
-end
-if not _bf or not _bf.Parent then
-_bi()
-return
-end
-if not _bg or not _bh then return end
-local _bn=_bc.Position
-local _bo=_bh.Position
-local _bp=(_bn-_bo).Magnitude
-if _bp>0.5 then
-_bg:MoveTo(_bn)
-local _bq=tick()
-if _bq-_bl>0.5 then
-local _br=_bh.Position
-if(_br-_bo).Magnitude<0.1 then
-_bm=_bm+1
-if _bm>3 then
-_bg.Jump=true
-_bm=0
-end
-else
-_bm=0
-end
-_bl=_bq
-end
-_bg.WalkSpeed=_bd
-else
-_bg:MoveTo(_bn+Vector3.new(1,0,1))
-_bg.WalkSpeed=_bd
-end
-end)
+local function createAutoBall()
+	if AutoBallGui then
+		destroyAutoBall()
+	end
+	autoBallChar = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	autoBallHum = autoBallChar:WaitForChild("Humanoid")
+	autoBallRoot = autoBallChar:WaitForChild("HumanoidRootPart")
+
+	local gui = Instance.new("ScreenGui")
+	gui.Name = "AutoFollowGUI"
+	gui.ResetOnSpawn = false
+	gui.IgnoreGuiInset = true
+	gui.Parent = LocalPlayer:WaitForChild("PlayerGui")
+	AutoBallGui = gui
+
+	local button = Instance.new("ImageButton")
+	button.Name = "AutoFollowButton"
+	button.Size = UDim2.new(0, 60, 0, 60)
+	button.Position = UDim2.new(0.9, -70, 0.8, -30)
+	button.BackgroundColor3 = Color3.new(0, 0, 0)
+	button.BorderSizePixel = 0
+	button.AutoButtonColor = true
+	button.BackgroundTransparency = 0
+	button.Parent = gui
+
+	local textLabel = Instance.new("TextLabel")
+	textLabel.Size = UDim2.new(1, 0, 1, 0)
+	textLabel.BackgroundTransparency = 1
+	textLabel.Text = "Auto Follow"
+	textLabel.TextColor3 = Color3.new(1, 1, 1)
+	textLabel.TextScaled = true
+	textLabel.Font = Enum.Font.GothamBold
+	textLabel.Parent = button
+
+	local corner = Instance.new("UICorner")
+	corner.CornerRadius = UDim.new(0, 10)
+	corner.Parent = button
+
+	local function onTouched(hit)
+		if hit and hit.Name == "TPS" and hit:IsA("BasePart") then
+			targetPart = hit
+		end
+	end
+
+	local function setupTouch(char)
+		for _, part in pairs(char:GetDescendants()) do
+			if part:IsA("BasePart") then
+				table.insert(AutoBallConnections, part.Touched:Connect(onTouched))
+			end
+		end
+		table.insert(AutoBallConnections, char.DescendantAdded:Connect(function(desc)
+			if desc:IsA("BasePart") then
+				table.insert(AutoBallConnections, desc.Touched:Connect(onTouched))
+			end
+		end))
+	end
+
+	setupTouch(autoBallChar)
+
+	table.insert(AutoBallConnections, button.MouseButton1Click:Connect(function()
+		button.Size = UDim2.new(0, 55, 0, 55)
+		task.wait(0.1)
+		button.Size = UDim2.new(0, 60, 0, 60)
+		startFollowing()
+	end))
+
+	local dragging, dragInput, dragStart, startPos = false, nil, nil, nil
+
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		button.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+	end
+
+	table.insert(AutoBallConnections, button.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = button.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end))
+
+	table.insert(AutoBallConnections, button.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end))
+
+	table.insert(AutoBallConnections, UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			updateInput(input)
+		end
+	end))
+
+	table.insert(AutoBallConnections, UserInputService.TouchMoved:Connect(function(touch)
+		if dragging then
+			updateInput(touch)
+		end
+	end))
+
+	table.insert(AutoBallConnections, LocalPlayer.CharacterAdded:Connect(function(newCharacter)
+		autoBallChar = newCharacter
+		autoBallHum = newCharacter:WaitForChild("Humanoid")
+		autoBallRoot = newCharacter:WaitForChild("HumanoidRootPart")
+		setupTouch(newCharacter)
+		if isFollowing then
+			stopFollowing()
+			task.wait(0.5)
+			startFollowing()
+		end
+	end))
+
+	table.insert(AutoBallConnections, task.spawn(function()
+		while AutoBallGui and AutoBallGui.Parent do
+			task.wait(3)
+			if isFollowing then
+				if not targetPart or not targetPart.Parent then
+					stopFollowing()
+				end
+			end
+		end
+	end))
 end
 
-local function _bs()
-_bi()
-for _,_u in ipairs(_b9)do pcall(function()_u:Disconnect()end)end
-table.clear(_b9)
-if _b8 then _b8:Destroy()_b8=nil end
-_bc=nil
-end
+local ReachTab = Window:Tab({ Title = "Reach", Icon = "target" })
 
-local function _bt()
-if _b8 then _bs()end
-_bf=_8.Character or _8.CharacterAdded:Wait()
-_bg=_bf:WaitForChild(string.char(72,117,109,97,110,111,105,100))
-_bh=_bf:WaitForChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
-local _w=Instance.new(string.char(83,99,114,101,101,110,71,117,105))
-_w.Name=string.char(65,117,116,111,70,111,108,108,111,119,71,85,73)
-_w.ResetOnSpawn=false
-_w.IgnoreGuiInset=true
-_w.Parent=_8:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))
-_b8=_w
-local _bu=Instance.new(string.char(73,109,97,103,101,66,117,116,116,111,110))
-_bu.Name=string.char(65,117,116,111,70,111,108,108,111,119,66,117,116,116,111,110)
-_bu.Size=UDim2.new(0,60,0,60)
-_bu.Position=UDim2.new(0.9,-70,0.8,-30)
-_bu.BackgroundColor3=Color3.new(0,0,0)
-_bu.BorderSizePixel=0
-_bu.AutoButtonColor=true
-_bu.BackgroundTransparency=0
-_bu.Parent=_w
-local _bv=Instance.new(string.char(84,101,120,116,76,97,98,101,108))
-_bv.Size=UDim2.new(1,0,1,0)
-_bv.BackgroundTransparency=1
-_bv.Text=string.char(65,117,116,111,32,70,111,108,108,111,119)
-_bv.TextColor3=Color3.new(1,1,1)
-_bv.TextScaled=true
-_bv.Font=Enum.Font.GothamBold
-_bv.Parent=_bu
-local _bw=Instance.new(string.char(85,73,67,111,114,110,101,114))
-_bw.CornerRadius=UDim.new(0,10)
-_bw.Parent=_bu
-local function _bx(_by)
-if _by and _by.Name==string.char(84,80,83)and _by:IsA(string.char(66,97,115,101,80,97,114,116))then
-_bc=_by
-end
-end
-local function _bz(_h)
-for _,_bA in pairs(_h:GetDescendants())do
-if _bA:IsA(string.char(66,97,115,101,80,97,114,116))then
-table.insert(_b9,_bA.Touched:Connect(_bx))
-end
-end
-table.insert(_b9,_h.DescendantAdded:Connect(function(_bB)
-if _bB:IsA(string.char(66,97,115,101,80,97,114,116))then
-table.insert(_b9,_bB.Touched:Connect(_bx))
-end
-end))
-end
-_bz(_bf)
-table.insert(_b9,_bu.MouseButton1Click:Connect(function()
-_bu.Size=UDim2.new(0,55,0,55)
-task.wait(0.1)
-_bu.Size=UDim2.new(0,60,0,60)
-_bk()
-end))
-local _A,_B,_C,_D=false,nil,nil,nil
-local function _bC(_E)
-local _G=_E.Position-_C
-_bu.Position=UDim2.new(_D.X.Scale,_D.X.Offset+_G.X,_D.Y.Scale,_D.Y.Offset+_G.Y)
-end
-table.insert(_b9,_bu.InputBegan:Connect(function(_E)
-if _E.UserInputType==Enum.UserInputType.MouseButton1 or _E.UserInputType==Enum.UserInputType.Touch then
-_A=true
-_C=_E.Position
-_D=_bu.Position
-_E.Changed:Connect(function()
-if _E.UserInputState==Enum.UserInputState.End then _A=false end
-end)
-end
-end))
-table.insert(_b9,_bu.InputChanged:Connect(function(_E)
-if _E.UserInputType==Enum.UserInputType.MouseMovement or _E.UserInputType==Enum.UserInputType.Touch then
-_B=_E
-end
-end))
-table.insert(_b9,_5.InputChanged:Connect(function(_E)
-if _E==_B and _A then _bC(_E)end
-end))
-table.insert(_b9,_5.TouchMoved:Connect(function(_bD)
-if _A then _bC(_bD)end
-end))
-table.insert(_b9,_8.CharacterAdded:Connect(function(_bE)
-_bf=_bE
-_bg=_bE:WaitForChild(string.char(72,117,109,97,110,111,105,100))
-_bh=_bE:WaitForChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
-_bz(_bE)
-if _ba then
-_bi()
-task.wait(0.5)
-_bk()
-end
-end))
-table.insert(_b9,task.spawn(function()
-while _b8 and _b8.Parent do
-task.wait(3)
-if _ba then
-if not _bc or not _bc.Parent then
-_bi()
-end
-end
-end
-end))
-end
+ReachTab:Toggle({
+	Title = "Reach",
+	Value = false,
+	Callback = function(v)
+		ReachConfig.isActive = v
+	end,
+})
 
-local _bF=_a:Tab({Title=string.char(82,101,97,99,104),Icon=string.char(116,97,114,103,101,116)})
-_
+ReachTab:Slider({
+	Title = "Reach Distance",
+	Step = 0.5,
+	Value = { Min = 1, Max = 10, Default = 7 },
+	Callback = function(v)
+		ReachConfig.reach = v
+	end,
+})
+
+local HelpsTab = Window:Tab({ Title = "Helps", Icon = "help-circle" })
+
+HelpsTab:Toggle({
+	Title = "Tot (Mobile)",
+	Value = false,
+	Callback = function(v)
+		if v then
+			createTot()
+		else
+			destroyTot()
+		end
+	end,
+})
+
+HelpsTab:Toggle({
+	Title = "Control Ball (Mobile)",
+	Value = false,
+	Callback = function(v)
+		if v then
+			createControlBall()
+		else
+			destroyControlBall()
+		end
+	end,
+})
+
+HelpsTab:Toggle({
+	Title = "Auto Hambolo (PC)",
+	Value = false,
+	Callback = function(v)
+		setAuto(v)
+	end,
+})
+
+HelpsTab:Keybind({
+	Title = "Auto Hambolo Keybind",
+	Value = Enum.KeyCode.R,
+	Callback = function(v)
+		if typeof(v) == "EnumItem" then
+			AutoConfig.ToggleKey = v
+		elseif type(v) == "string" then
+			AutoConfig.ToggleKey = Enum.KeyCode[v] or Enum.KeyCode.R
+		end
+	end,
+})
+
+local VisualTab = Window:Tab({ Title = "Visual", Icon = "eye" })
+
+VisualTab:Toggle({
+	Title = "Predict Ball",
+	Value = false,
+	Callback = function(v)
+		PredictEnabled = v
+		if not v then
+			Line.Visible = false
+			Dot.Visible = false
+		end
+	end,
+})
+
+local SkillsTab = Window:Tab({ Title = "Skills", Icon = "zap" })
+
+SkillsTab:Toggle({
+	Title = "Auto Ball",
+	Value = false,
+	Callback = function(v)
+		if v then
+			createAutoBall()
+		else
+			destroyAutoBall()
+		end
+	end,
+})
+
+local SettingsTab = Window:Tab({ Title = "Settings", Icon = "settings" })
+
+SettingsTab:Keybind({
+	Title = "Toggle UI Key",
+	Value = Enum.KeyCode.RightShift,
+	Callback = function(v)
+		local key = (typeof(v) == "EnumItem") and v or Enum.KeyCode[v]
+		if key then
+			Window:SetToggleKey(key)
+		end
+	end,
+})
