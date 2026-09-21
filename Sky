@@ -1,1127 +1,528 @@
-function zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy(code)res=''for i in ipairs(code)do res=res..string.char(code[i]/105)end return res end 
+local _0=game:GetService(string.char(85,115,101,114,73,110,112,117,116,83,101,114,118,105,99,101))
+local _1=game:GetService(string.char(80,108,97,121,101,114,115))
+local _2=game:GetService(string.char(82,117,110,83,101,114,118,105,99,101))
+local _3=game:GetService(string.char(86,105,114,116,117,97,108,73,110,112,117,116,77,97,110,97,103,101,114))
+local _4=game:GetService(string.char(87,111,114,107,115,112,97,99,101))
+local _5=_1.LocalPlayer
+local _6=_4.CurrentCamera
 
-
-local UserInputService = game:GetService(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8925,12075,10605,11970,7665,11550,11760,12285,12180,8715,10605,11970,12390,11025,10395,10605}))
-local Players = game:GetService(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8400,11340,10185,12705,10605,11970,12075}))
-local RunService = game:GetService(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8610,12285,11550,8715,10605,11970,12390,11025,10395,10605}))
-local VirtualInputManager = game:GetService(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({9030,11025,11970,12180,12285,10185,11340,7665,11550,11760,12285,12180,8085,10185,11550,10185,10815,10605,11970}))
-local Workspace = game:GetService(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({9135,11655,11970,11235,12075,11760,10185,10395,10605}))
-local LocalPlayer = Players.LocalPlayer
-local camera = Workspace.CurrentCamera
-
-local Library = loadstring(game:HttpGet(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({10920,12180,12180,11760,12075,6090,4935,4935,11970,10185,12495,4830,10815,11025,12180,10920,12285,10290,12285,12075,10605,11970,10395,11655,11550,12180,10605,11550,12180,4830,10395,11655,11445,4935,11340,12600,12180,10605,4935,11340,10185,12180,10605,12075,4725,11340,11025,10290,4935,11445,10185,11025,11550,4935,8085,10185,11025,11550,4830,11340,12285,10185})))()
-local Window = Library:CreateWindow({
-	Title = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815}),
-	Theme = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7140,10185,11970,11235}),
-	Size = UDim2.fromOffset(570, 400),
-	Transparency = 0.2,
-	Blurring = true,
-	MinimizeKeybind = Enum.KeyCode.RightShift,
+local _7=loadstring(game:HttpGet(string.char(104,116,116,112,115,58,47,47,114,97,119,46,103,105,116,104,117,98,117,115,101,114,99,111,110,116,101,110,116,46,99,111,109,47,108,120,116,101,47,108,97,116,101,115,45,108,105,98,47,109,97,105,110,47,77,97,105,110,46,108,117,97)))()
+local _8=_7:CreateWindow({
+Title=string.char(83,107,121,76,105,110,103),
+Theme=string.char(68,97,114,107),
+Size=UDim2.fromOffset(570,400),
+Transparency=0.2,
+Blurring=true,
+MinimizeKeybind=Enum.KeyCode.RightShift
 })
 
-local Themes = {
-	Dark = {
-		Primary = Color3.fromRGB(30, 30, 30),
-		Secondary = Color3.fromRGB(35, 35, 35),
-		Component = Color3.fromRGB(40, 40, 40),
-		Interactables = Color3.fromRGB(45, 45, 45),
-		Tab = Color3.fromRGB(200, 200, 200),
-		Title = Color3.fromRGB(240,240,240),
-		Description = Color3.fromRGB(200,200,200),
-		Shadow = Color3.fromRGB(0, 0, 0),
-		Outline = Color3.fromRGB(40, 40, 40),
-		Icon = Color3.fromRGB(220, 220, 220),
-	},
-	Void = {
-		Primary = Color3.fromRGB(15, 15, 15),
-		Secondary = Color3.fromRGB(20, 20, 20),
-		Component = Color3.fromRGB(25, 25, 25),
-		Interactables = Color3.fromRGB(30, 30, 30),
-		Tab = Color3.fromRGB(200, 200, 200),
-		Title = Color3.fromRGB(240,240,240),
-		Description = Color3.fromRGB(200,200,200),
-		Shadow = Color3.fromRGB(0, 0, 0),
-		Outline = Color3.fromRGB(40, 40, 40),
-		Icon = Color3.fromRGB(220, 220, 220),
-	},
-	Light = {
-		Primary = Color3.fromRGB(232, 232, 232),
-		Secondary = Color3.fromRGB(255, 255, 255),
-		Component = Color3.fromRGB(245, 245, 245),
-		Interactables = Color3.fromRGB(235, 235, 235),
-		Tab = Color3.fromRGB(50, 50, 50),
-		Title = Color3.fromRGB(0, 0, 0),
-		Description = Color3.fromRGB(100, 100, 100),
-		Shadow = Color3.fromRGB(255, 255, 255),
-		Outline = Color3.fromRGB(210, 210, 210),
-		Icon = Color3.fromRGB(100, 100, 100),
-	},
+local _9={
+Dark={
+Primary=Color3.fromRGB(30,30,30),
+Secondary=Color3.fromRGB(35,35,35),
+Component=Color3.fromRGB(40,40,40),
+Interactables=Color3.fromRGB(45,45,45),
+Tab=Color3.fromRGB(200,200,200),
+Title=Color3.fromRGB(240,240,240),
+Description=Color3.fromRGB(200,200,200),
+Shadow=Color3.fromRGB(0,0,0),
+Outline=Color3.fromRGB(40,40,40),
+Icon=Color3.fromRGB(220,220,220)
+},
+Void={
+Primary=Color3.fromRGB(15,15,15),
+Secondary=Color3.fromRGB(20,20,20),
+Component=Color3.fromRGB(25,25,25),
+Interactables=Color3.fromRGB(30,30,30),
+Tab=Color3.fromRGB(200,200,200),
+Title=Color3.fromRGB(240,240,240),
+Description=Color3.fromRGB(200,200,200),
+Shadow=Color3.fromRGB(0,0,0),
+Outline=Color3.fromRGB(40,40,40),
+Icon=Color3.fromRGB(220,220,220)
+},
+Light={
+Primary=Color3.fromRGB(232,232,232),
+Secondary=Color3.fromRGB(255,255,255),
+Component=Color3.fromRGB(245,245,245),
+Interactables=Color3.fromRGB(235,235,235),
+Tab=Color3.fromRGB(50,50,50),
+Title=Color3.fromRGB(0,0,0),
+Description=Color3.fromRGB(100,100,100),
+Shadow=Color3.fromRGB(255,255,255),
+Outline=Color3.fromRGB(210,210,210),
+Icon=Color3.fromRGB(100,100,100)
+}
 }
 
-Window:SetTheme(Themes.Dark)
+_8:SetTheme(_9.Dark)
+_8:AddTabSection({Name=string.char(77,97,105,110),Order=1})
+_8:AddTabSection({Name=string.char(83,101,116,116,105,110,103,115),Order=2})
 
-Window:AddTabSection({ Name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8085,10185,11025,11550}), Order = 1 })
-Window:AddTabSection({ Name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,10605,12180,12180,11025,11550,10815,12075}), Order = 2 })
+local _a={reach=7,targetBall=string.char(84,80,83),isActive=false}
+local _b={ActivationDistance=20,ClickInterval=0.1,TargetName=string.char(84,80,83),ToggleKey=Enum.KeyCode.R,ActionKey=string.char(70),isActive=false}
+local _c,_d=nil,nil
+local _e=false
+local _f=0.35
+local _g=nil
 
-local ReachConfig = {
-	reach = 7,
-	targetBall = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,8400,8715}),
-	isActive = false,
-}
+local _h=Drawing.new(string.char(76,105,110,101))
+_h.Visible=false
+_h.Thickness=2
+_h.Transparency=1
+_h.Color=Color3.fromRGB(255,60,60)
 
-local AutoConfig = {
-	ActivationDistance = 20,
-	ClickInterval = 0.1,
-	TargetName = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,8400,8715}),
-	ToggleKey = Enum.KeyCode.R,
-	ActionKey = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7350}),
-	isActive = false,
-}
-local autoHB, autoRoot = nil, nil
+local _i=Drawing.new(string.char(67,105,114,99,108,101))
+_i.Visible=false
+_i.Filled=true
+_i.Radius=6
+_i.Transparency=1
+_i.Color=Color3.fromRGB(255,60,60)
 
-local PredictEnabled = false
-local PredictionTime = 0.35
-local TPS = nil
-
-local Line = Drawing.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7980,11025,11550,10605}))
-Line.Visible = false
-Line.Thickness = 2
-Line.Transparency = 1
-Line.Color = Color3.fromRGB(255, 60, 60)
-
-local Dot = Drawing.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7035,11025,11970,10395,11340,10605}))
-Dot.Visible = false
-Dot.Filled = true
-Dot.Radius = 6
-Dot.Transparency = 1
-Dot.Color = Color3.fromRGB(255, 60, 60)
-
-local function findAllTargetBalls(name)
-	local balls = {}
-	for _, v in ipairs(Workspace:GetDescendants()) do
-		if v:IsA(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({6930,10185,12075,10605,8400,10185,11970,12180})) and v.Name == name then
-			table.insert(balls, v)
-		end
-	end
-	return balls
+local function _j(_k)
+local _l={}
+for _,_m in ipairs(_4:GetDescendants())do
+if _m:IsA(string.char(66,97,115,101,80,97,114,116))and _m.Name==_k then table.insert(_l,_m)end
+end
+return _l
 end
 
-local function getLimbs()
-	local char = LocalPlayer.Character
-	if not char then return {} end
-	local limbs = {}
-	for _, n in ipairs({zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8610,11025,10815,10920,12180,3360,7980,10605,10815}), zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7980,10605,10710,12180,3360,7980,10605,10815}), zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8610,11025,10815,10920,12180,3360,6825,11970,11445}), zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7980,10605,10710,12180,3360,6825,11970,11445}), zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8610,11025,10815,10920,12180,3360,7560,10185,11550,10500}), zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7980,10605,10710,12180,3360,7560,10185,11550,10500})}) do
-		local p = char:FindFirstChild(n)
-		if p then table.insert(limbs, p) end
-	end
-	return limbs
+local function _n()
+local _o=_5.Character
+if not _o then return{}end
+local _p={}
+for _,_q in ipairs({string.char(82,105,103,104,116,32,76,101,103),string.char(76,101,102,116,32,76,101,103),string.char(82,105,103,104,116,32,65,114,109),string.char(76,101,102,116,32,65,114,109),string.char(82,105,103,104,116,32,72,97,110,100),string.char(76,101,102,116,32,72,97,110,100)})do
+local _r=_o:FindFirstChild(_q)
+if _r then table.insert(_p,_r)end
+end
+return _p
 end
 
-RunService.RenderStepped:Connect(function()
-	if not ReachConfig.isActive then return end
-	local char = LocalPlayer.Character
-	if not char then return end
-	local hrp = char:FindFirstChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7560,12285,11445,10185,11550,11655,11025,10500,8610,11655,11655,12180,8400,10185,11970,12180}))
-	if not hrp then return end
-	local balls = findAllTargetBalls(ReachConfig.targetBall)
-	if #balls == 0 then return end
-	local limbs = getLimbs()
-	if #limbs == 0 then return end
-	for _, ball in ipairs(balls) do
-		if ball and ball.Parent then
-			if (ball.Position - hrp.Position).Magnitude <= ReachConfig.reach then
-				for _, limb in ipairs(limbs) do
-					pcall(function()
-						for i = 1, 5 do
-							firetouchinterest(ball, limb, 0)
-							task.wait(0.0001)
-							firetouchinterest(ball, limb, 1)
-							task.wait(0.0001)
-						end
-					end)
-				end
-			end
-		end
-	end
+_2.RenderStepped:Connect(function()
+if not _a.isActive then return end
+local _o=_5.Character
+if not _o then return end
+local _s=_o:FindFirstChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
+if not _s then return end
+local _t=_j(_a.targetBall)
+if #_t==0 then return end
+local _u=_n()
+if #_u==0 then return end
+for _,_v in ipairs(_t)do
+if _v and _v.Parent and(_v.Position-_s.Position).Magnitude<=_a.reach then
+for _,_w in ipairs(_u)do
+pcall(function()
+for _x=1,5 do
+firetouchinterest(_v,_w,0)
+task.wait(0.0001)
+firetouchinterest(_v,_w,1)
+task.wait(0.0001)
+end
+end)
+end
+end
+end
 end)
 
-local TotGui, TotConnections = nil, {}
+local _y,_z=nil,{}
 
-local function destroyTot()
-	for _, c in ipairs(TotConnections) do
-		pcall(function() c:Disconnect() end)
-	end
-	table.clear(TotConnections)
-	if TotGui then TotGui:Destroy() TotGui = nil end
-	pcall(function()
-		require(LocalPlayer.PlayerScripts:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8400,11340,10185,12705,10605,11970,8085,11655,10500,12285,11340,10605}))):GetControls():Enable()
-	end)
+local function _A()
+for _,_B in ipairs(_z)do pcall(function()_B:Disconnect()end)end
+table.clear(_z)
+if _y then _y:Destroy()_y=nil end
+pcall(function()require(_5.PlayerScripts:WaitForChild(string.char(80,108,97,121,101,114,77,111,100,117,108,101))):GetControls():Enable()end)
 end
 
-local function createTot()
-	if TotGui then destroyTot() end
-	pcall(function()
-		require(LocalPlayer.PlayerScripts:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8400,11340,10185,12705,10605,11970,8085,11655,10500,12285,11340,10605}))):GetControls():Disable()
-	end)
-
-	local gui = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,10395,11970,10605,10605,11550,7455,12285,11025}))
-	gui.Name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8085,11655,10290,11025,11340,10605,7875,10605,12705,10290,11025,11550,10500,7455,12285,11025})
-	gui.ResetOnSpawn = false
-	gui.IgnoreGuiInset = true
-	gui.DisplayOrder = 999
-	gui.Parent = LocalPlayer:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8400,11340,10185,12705,10605,11970,7455,12285,11025}))
-	TotGui = gui
-
-	local KEYS = {
-		{ name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8610}), key = Enum.KeyCode.R },
-		{ name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820}), key = Enum.KeyCode.T },
-	}
-
-	local function makeDraggable(btn)
-		local dragging, dragInput, dragStart, startPos
-		table.insert(TotConnections, btn.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				dragging = true
-				dragStart = input.Position
-				startPos = btn.Position
-				local c
-				c = input.Changed:Connect(function()
-					if input.UserInputState == Enum.UserInputState.End then
-						dragging = false
-						c:Disconnect()
-					end
-				end)
-			end
-		end))
-		table.insert(TotConnections, btn.InputChanged:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-				dragInput = input
-			end
-		end))
-		table.insert(TotConnections, UserInputService.InputChanged:Connect(function(input)
-			if input == dragInput and dragging then
-				local d = input.Position - dragStart
-				btn.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + d.X, startPos.Y.Scale, startPos.Y.Offset + d.Y)
-			end
-		end))
-	end
-
-	for i, data in ipairs(KEYS) do
-		local btn = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,10605,12600,12180,6930,12285,12180,12180,11655,11550}))
-		btn.Size = UDim2.new(0, 60, 0, 60)
-		btn.Position = UDim2.new(1, -90, 1, -220 - ((i - 1) * 75))
-		btn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-		btn.BackgroundTransparency = 0.3
-		btn.Text = data.name
-		btn.TextColor3 = Color3.new(1, 1, 1)
-		btn.TextScaled = true
-		btn.Font = Enum.Font.GothamBold
-		btn.AutoButtonColor = false
-		btn.Parent = gui
-		Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8925,7665,7035,11655,11970,11550,10605,11970}), btn).CornerRadius = UDim.new(1, 0)
-		makeDraggable(btn)
-
-		local held, moved, pressStart = false, false, Vector2.zero
-		table.insert(TotConnections, btn.InputBegan:Connect(function(input)
-			if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				moved = false
-				pressStart = input.Position
-			end
-		end))
-		table.insert(TotConnections, btn.InputChanged:Connect(function(input)
-			if (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) and (input.Position - pressStart).Magnitude > 8 then
-				moved = true
-			end
-		end))
-		table.insert(TotConnections, btn.MouseButton1Click:Connect(function()
-			if moved then return end
-			if held then
-				held = false
-				btn.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-				VirtualInputManager:SendKeyEvent(false, data.key, false, game)
-			else
-				held = true
-				btn.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
-				VirtualInputManager:SendKeyEvent(true, data.key, false, game)
-			end
-		end))
-	end
-
-	local jumpBtn = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7665,11445,10185,10815,10605,6930,12285,12180,12180,11655,11550}))
-	jumpBtn.Size = UDim2.new(0, 70, 0, 70)
-	jumpBtn.Position = UDim2.new(1, -100, 1, -95)
-	jumpBtn.BackgroundTransparency = 1
-	jumpBtn.Image = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({11970,10290,12600,10185,12075,12075,10605,12180,11025,10500,6090,4935,4935,5145,5250,5040,5985,5775,5670,5460,5880,5145,5670,5775,5775,5775,5670,5355})
-	jumpBtn.Parent = gui
-
-	local jumpHeld, jumpHum = false, nil
-	local function bindJump(char)
-		jumpHum = char:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7560,12285,11445,10185,11550,11655,11025,10500}))
-	end
-	if LocalPlayer.Character then bindJump(LocalPlayer.Character) end
-	table.insert(TotConnections, LocalPlayer.CharacterAdded:Connect(bindJump))
-	table.insert(TotConnections, RunService.RenderStepped:Connect(function()
-		if jumpHeld and jumpHum then jumpHum.Jump = true end
-	end))
-	table.insert(TotConnections, jumpBtn.MouseButton1Down:Connect(function()
-		jumpHeld = true
-		jumpBtn.ImageColor3 = Color3.fromRGB(150, 150, 150)
-	end))
-	table.insert(TotConnections, jumpBtn.MouseButton1Up:Connect(function()
-		jumpHeld = false
-		jumpBtn.ImageColor3 = Color3.new(1, 1, 1)
-	end))
-
-	local joyR, joySize = 45, 220
-	local zone = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7350,11970,10185,11445,10605}))
-	zone.Size = UDim2.new(0, joySize, 0, joySize)
-	zone.Position = UDim2.new(0, 20, 1, -20 - joySize)
-	zone.BackgroundTransparency = 1
-	zone.Active = true
-	zone.Parent = gui
-
-	local thumb = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7350,11970,10185,11445,10605}))
-	thumb.Size = UDim2.new(0, 34, 0, 34)
-	thumb.AnchorPoint = Vector2.new(0.5, 0.5)
-	thumb.Position = UDim2.new(0.5, 0, 0.5, 0)
-	thumb.BackgroundColor3 = Color3.new(0, 0, 0)
-	thumb.BackgroundTransparency = 0.35
-	thumb.Parent = zone
-	Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8925,7665,7035,11655,11970,11550,10605,11970}), thumb).CornerRadius = UDim.new(1, 0)
-
-	local joyActive, joyId, moveDir, hum = false, nil, Vector3.zero, nil
-	local function bindHum(char)
-		hum = char:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7560,12285,11445,10185,11550,11655,11025,10500}))
-	end
-	if LocalPlayer.Character then bindHum(LocalPlayer.Character) end
-	table.insert(TotConnections, LocalPlayer.CharacterAdded:Connect(bindHum))
-
-	table.insert(TotConnections, zone.InputBegan:Connect(function(input, gp)
-		if gp then return end
-		if input.UserInputType == Enum.UserInputType.Touch or input.UserInputType == Enum.UserInputType.MouseButton1 then
-			joyActive = true
-			joyId = input
-		end
-	end))
-	table.insert(TotConnections, UserInputService.InputChanged:Connect(function(input)
-		if joyActive and input == joyId then
-			local center = zone.AbsolutePosition + zone.AbsoluteSize / 2
-			local delta = Vector2.new(input.Position.X, input.Position.Y) - center
-			local dist = delta.Magnitude
-			local clamped = dist > joyR and delta.Unit * joyR or delta
-			thumb.Position = UDim2.new(0.5, clamped.X, 0.5, clamped.Y)
-			local n = dist > 0 and (clamped / joyR) or Vector2.zero
-			moveDir = Vector3.new(n.X, 0, n.Y)
-		end
-	end))
-	table.insert(TotConnections, UserInputService.InputEnded:Connect(function(input)
-		if joyActive and input == joyId then
-			joyActive = false
-			joyId = nil
-			thumb.Position = UDim2.new(0.5, 0, 0.5, 0)
-			moveDir = Vector3.zero
-		end
-	end))
-	table.insert(TotConnections, RunService.RenderStepped:Connect(function()
-		if not hum then return end
-		if moveDir.Magnitude > 0.05 then
-			local cam = Workspace.CurrentCamera.CFrame
-			local fwd = Vector3.new(cam.LookVector.X, 0, cam.LookVector.Z)
-			if fwd.Magnitude > 0 then fwd = fwd.Unit end
-			local right = Vector3.new(cam.RightVector.X, 0, cam.RightVector.Z)
-			if right.Magnitude > 0 then right = right.Unit end
-			local dir = right * moveDir.X + fwd * -moveDir.Z
-			if dir.Magnitude > 0 then hum:Move(dir, false) end
-		else
-			hum:Move(Vector3.zero, false)
-		end
-	end))
+local function _C()
+if _y then _A()end
+pcall(function()require(_5.PlayerScripts:WaitForChild(string.char(80,108,97,121,101,114,77,111,100,117,108,101))):GetControls():Disable()end)
+local _D=Instance.new(string.char(83,99,114,101,101,110,71,117,105))
+_D.Name=string.char(77,111,98,105,108,101,75,101,121,98,105,110,100,71,117,105)
+_D.ResetOnSpawn=false
+_D.IgnoreGuiInset=true
+_D.DisplayOrder=999
+_D.Parent=_5:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))
+_y=_D
+local _E={{name=string.char(82),key=Enum.KeyCode.R},{name=string.char(84),key=Enum.KeyCode.T}}
+local function _F(_G)
+local _H,_I,_J,_K
+table.insert(_z,_G.InputBegan:Connect(function(_L)
+if _L.UserInputType==Enum.UserInputType.MouseButton1 or _L.UserInputType==Enum.UserInputType.Touch then
+_H=true
+_J=_L.Position
+_K=_G.Position
+local _M
+_M=_L.Changed:Connect(function()
+if _L.UserInputState==Enum.UserInputState.End then _H=false _M:Disconnect()end
+end)
+end
+end))
+table.insert(_z,_G.InputChanged:Connect(function(_L)
+if _L.UserInputType==Enum.UserInputType.MouseMovement or _L.UserInputType==Enum.UserInputType.Touch then _I=_L end
+end))
+table.insert(_z,_0.InputChanged:Connect(function(_L)
+if _L==_I and _H then
+local _N=_L.Position-_J
+_G.Position=UDim2.new(_K.X.Scale,_K.X.Offset+_N.X,_K.Y.Scale,_K.Y.Offset+_N.Y)
+end
+end))
+end
+for _O,_P in ipairs(_E)do
+local _G=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
+_G.Size=UDim2.new(0,60,0,60)
+_G.Position=UDim2.new(1,-90,1,-220-((_O-1)*75))
+_G.BackgroundColor3=Color3.fromRGB(30,30,30)
+_G.BackgroundTransparency=0.3
+_G.Text=_P.name
+_G.TextColor3=Color3.new(1,1,1)
+_G.TextScaled=true
+_G.Font=Enum.Font.GothamBold
+_G.AutoButtonColor=false
+_G.Parent=_D
+Instance.new(string.char(85,73,67,111,114,110,101,114),_G).CornerRadius=UDim.new(1,0)
+_F(_G)
+local _Q,_R,_S=false,false,Vector2.zero
+table.insert(_z,_G.InputBegan:Connect(function(_L)
+if _L.UserInputType==Enum.UserInputType.MouseButton1 or _L.UserInputType==Enum.UserInputType.Touch then
+_R=false
+_S=_L.Position
+end
+end))
+table.insert(_z,_G.InputChanged:Connect(function(_L)
+if(_L.UserInputType==Enum.UserInputType.MouseMovement or _L.UserInputType==Enum.UserInputType.Touch)and(_L.Position-_S).Magnitude>8 then _R=true end
+end))
+table.insert(_z,_G.MouseButton1Click:Connect(function()
+if _R then return end
+if _Q then
+_Q=false
+_G.BackgroundColor3=Color3.fromRGB(30,30,30)
+_3:SendKeyEvent(false,_P.key,false,game)
+else
+_Q=true
+_G.BackgroundColor3=Color3.fromRGB(0,170,255)
+_3:SendKeyEvent(true,_P.key,false,game)
+end
+end))
+end
+local _T=Instance.new(string.char(73,109,97,103,101,66,117,116,116,111,110))
+_T.Size=UDim2.new(0,70,0,70)
+_T.Position=UDim2.new(1,-100,1,-95)
+_T.BackgroundTransparency=1
+_T.Image=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,50,48,57,55,54,52,56,49,54,55,55,55,54,51)
+_T.Parent=_D
+local _U,_V=false,nil
+local function _W(_o)_V=_o:WaitForChild(string.char(72,117,109,97,110,111,105,100))end
+if _5.Character then _W(_5.Character)end
+table.insert(_z,_5.CharacterAdded:Connect(_W))
+table.insert(_z,_2.RenderStepped:Connect(function()if _U and _V then _V.Jump=true end end))
+table.insert(_z,_T.MouseButton1Down:Connect(function()_U=true _T.ImageColor3=Color3.fromRGB(150,150,150)end))
+table.insert(_z,_T.MouseButton1Up:Connect(function()_U=false _T.ImageColor3=Color3.new(1,1,1)end))
+local _X,_Y=45,220
+local _Z=Instance.new(string.char(70,114,97,109,101))
+_Z.Size=UDim2.new(0,_Y,0,_Y)
+_Z.Position=UDim2.new(0,20,1,-20-_Y)
+_Z.BackgroundTransparency=1
+_Z.Active=true
+_Z.Parent=_D
+local __=Instance.new(string.char(70,114,97,109,101))
+__.Size=UDim2.new(0,34,0,34)
+__.AnchorPoint=Vector2.new(0.5,0.5)
+__.Position=UDim2.new(0.5,0,0.5,0)
+__.BackgroundColor3=Color3.new(0,0,0)
+__.BackgroundTransparency=0.35
+__.Parent=_Z
+Instance.new(string.char(85,73,67,111,114,110,101,114),__).CornerRadius=UDim.new(1,0)
+local _aa,_ab,_ac,_ad=false,nil,Vector3.zero,nil
+local function _ae(_o)_ad=_o:WaitForChild(string.char(72,117,109,97,110,111,105,100))end
+if _5.Character then _ae(_5.Character)end
+table.insert(_z,_5.CharacterAdded:Connect(_ae))
+table.insert(_z,_Z.InputBegan:Connect(function(_L,_af)
+if _af then return end
+if _L.UserInputType==Enum.UserInputType.Touch or _L.UserInputType==Enum.UserInputType.MouseButton1 then
+_aa=true
+_ab=_L
+end
+end))
+table.insert(_z,_0.InputChanged:Connect(function(_L)
+if _aa and _L==_ab then
+local _ag=_Z.AbsolutePosition+_Z.AbsoluteSize/2
+local _ah=Vector2.new(_L.Position.X,_L.Position.Y)-_ag
+local _ai=_ah.Magnitude
+local _aj=_ai>_X and _ah.Unit*_X or _ah
+__.Position=UDim2.new(0.5,_aj.X,0.5,_aj.Y)
+local _ak=_ai>0 and(_aj/_X)or Vector2.zero
+_ac=Vector3.new(_ak.X,0,_ak.Y)
+end
+end))
+table.insert(_z,_0.InputEnded:Connect(function(_L)
+if _aa and _L==_ab then
+_aa=false
+_ab=nil
+__.Position=UDim2.new(0.5,0,0.5,0)
+_ac=Vector3.zero
+end
+end))
+table.insert(_z,_2.RenderStepped:Connect(function()
+if not _ad then return end
+if _ac.Magnitude>0.05 then
+local _al=_4.CurrentCamera.CFrame
+local _am=Vector3.new(_al.LookVector.X,0,_al.LookVector.Z)
+if _am.Magnitude>0 then _am=_am.Unit end
+local _an=Vector3.new(_al.RightVector.X,0,_al.RightVector.Z)
+if _an.Magnitude>0 then _an=_an.Unit end
+local _ao=_an*_ac.X+_am*-_ac.Z
+if _ao.Magnitude>0 then _ad:Move(_ao,false)end
+else
+_ad:Move(Vector3.zero,false)
+end
+end))
 end
 
-local function updateAuto(char)
-	autoRoot = char:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7560,12285,11445,10185,11550,11655,11025,10500,8610,11655,11655,12180,8400,10185,11970,12180}))
-	if AutoConfig.isActive then
-		AutoConfig.isActive = false
-		if autoHB then autoHB:Disconnect() autoHB = nil end
-	end
+local function _ap(_o)
+_d=_o:WaitForChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
+if _b.isActive then
+_b.isActive=false
+if _c then _c:Disconnect()_c=nil end
 end
-if LocalPlayer.Character then updateAuto(LocalPlayer.Character) end
-LocalPlayer.CharacterAdded:Connect(updateAuto)
+end
+if _5.Character then _ap(_5.Character)end
+_5.CharacterAdded:Connect(_ap)
 
-local function setAuto(state)
-	AutoConfig.isActive = state
-	if state then
-		if autoHB then autoHB:Disconnect() end
-		autoHB = RunService.Heartbeat:Connect(function()
-			if not AutoConfig.isActive or not autoRoot then return end
-			for _, obj in pairs(Workspace:GetChildren()) do
-				if obj.Name == AutoConfig.TargetName and obj:IsA(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({6930,10185,12075,10605,8400,10185,11970,12180})) then
-					if (obj.Position - autoRoot.Position).Magnitude <= AutoConfig.ActivationDistance then
-						VirtualInputManager:SendKeyEvent(true, AutoConfig.ActionKey, false, game)
-						task.wait(AutoConfig.ClickInterval)
-						VirtualInputManager:SendKeyEvent(false, AutoConfig.ActionKey, false, game)
-						break
-					end
-				end
-			end
-		end)
-	else
-		if autoHB then autoHB:Disconnect() autoHB = nil end
-	end
+local function _aq(_ar)
+_b.isActive=_ar
+if _ar then
+if _c then _c:Disconnect()end
+_c=_2.Heartbeat:Connect(function()
+if not _b.isActive or not _d then return end
+for _,_as in pairs(_4:GetChildren())do
+if _as.Name==_b.TargetName and _as:IsA(string.char(66,97,115,101,80,97,114,116))then
+if(_as.Position-_d.Position).Magnitude<=_b.ActivationDistance then
+_3:SendKeyEvent(true,_b.ActionKey,false,game)
+task.wait(_b.ClickInterval)
+_3:SendKeyEvent(false,_b.ActionKey,false,game)
+break
+end
+end
+end
+end)
+else
+if _c then _c:Disconnect()_c=nil end
+end
 end
 
-UserInputService.InputBegan:Connect(function(input, gp)
-	if gp then return end
-	if input.KeyCode == AutoConfig.ToggleKey then
-		setAuto(not AutoConfig.isActive)
-	end
+_0.InputBegan:Connect(function(_L,_af)
+if _af then return end
+if _L.KeyCode==_b.ToggleKey then _aq(not _b.isActive)end
 end)
 
-local CBGui, CBConnections = nil, {}
-local controlling, controlledPart, controlConn, inputConn = false, nil, nil, nil
-local SPEED, CAM_DIST, CAM_H = 70, 16, 6
-local M_SENS, T_SENS = 0.004, 0.006
-local yaw, pitch = 0, 0.2
-local oldCamType, oldCamSub = camera.CameraType, camera.CameraSubject
+local _at,_au=nil,{}
+local _av,_aw,_ax,_ay=false,nil,nil,nil
+local _az,_aA,_aB=70,16,6
+local _aC,_aD=0.004,0.006
+local _aE,_aF=0,0.2
+local _aG,_aH=_6.CameraType,_6.CameraSubject
 
-local function stopControl()
-	controlling = false
-	if controlConn then controlConn:Disconnect() controlConn = nil end
-	if inputConn then inputConn:Disconnect() inputConn = nil end
-	camera.CameraType = oldCamType
-	camera.CameraSubject = oldCamSub
-	if CBGui then
-		local b = CBGui:FindFirstChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815}))
-		if b then
-			b.BackgroundColor3 = Color3.fromRGB(137, 207, 240)
-			b.Text = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815})
-		end
-	end
-	controlledPart = nil
+local function _aI()
+_av=false
+if _ax then _ax:Disconnect()_ax=nil end
+if _ay then _ay:Disconnect()_ay=nil end
+_6.CameraType=_aG
+_6.CameraSubject=_aH
+if _at then
+local _aJ=_at:FindFirstChild(string.char(83,107,121,76,105,110,103))
+if _aJ then
+_aJ.BackgroundColor3=Color3.fromRGB(137,207,240)
+_aJ.Text=string.char(83,107,121,76,105,110,103)
+end
+end
+_aw=nil
 end
 
-local function destroyControlBall()
-	stopControl()
-	for _, c in ipairs(CBConnections) do
-		pcall(function() c:Disconnect() end)
-	end
-	table.clear(CBConnections)
-	if CBGui then CBGui:Destroy() CBGui = nil end
+local function _aK()
+_aI()
+for _,_B in ipairs(_au)do pcall(function()_B:Disconnect()end)end
+table.clear(_au)
+if _at then _at:Destroy()_at=nil end
 end
 
-local function getClosestTPS()
-	local char = LocalPlayer.Character
-	if not char then return nil end
-	local root = char:FindFirstChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7560,12285,11445,10185,11550,11655,11025,10500,8610,11655,11655,12180,8400,10185,11970,12180}))
-	if not root then return nil end
-	local closest, dist = nil, 80
-	for _, obj in ipairs(Workspace:GetDescendants()) do
-		if obj.Name == zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,8400,8715}) then
-			local part
-			if obj:IsA(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8085,11655,10500,10605,11340})) then
-				part = obj.PrimaryPart or obj:FindFirstChildWhichIsA(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({6930,10185,12075,10605,8400,10185,11970,12180}))
-			elseif obj:IsA(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({6930,10185,12075,10605,8400,10185,11970,12180})) then
-				part = obj
-			end
-			if part then
-				local d = (part.Position - root.Position).Magnitude
-				if d < dist then
-					dist = d
-					closest = obj
-				end
-			end
-		end
-	end
-	return closest
+local function _aL()
+local _o=_5.Character
+if not _o then return nil end
+local _aM=_o:FindFirstChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
+if not _aM then return nil end
+local _aN,_aO=nil,80
+for _,_as in ipairs(_4:GetDescendants())do
+if _as.Name==string.char(84,80,83)then
+local _aP
+if _as:IsA(string.char(77,111,100,101,108))then
+_aP=_as.PrimaryPart or _as:FindFirstChildWhichIsA(string.char(66,97,115,101,80,97,114,116))
+elseif _as:IsA(string.char(66,97,115,101,80,97,114,116))then
+_aP=_as
+end
+if _aP then
+local _aQ=(_aP.Position-_aM.Position).Magnitude
+if _aQ<_aO then _aO=_aQ _aN=_as end
+end
+end
+end
+return _aN
 end
 
-local function startControl(target)
-	local part
-	if target:IsA(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8085,11655,10500,10605,11340})) then
-		part = target.PrimaryPart or target:FindFirstChildWhichIsA(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({6930,10185,12075,10605,8400,10185,11970,12180}))
-	else
-		part = target
-	end
-	if not part then return end
-	controlledPart = part
-	controlling = true
-	if CBGui then
-		local b = CBGui:FindFirstChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815}))
-		if b then
-			b.BackgroundColor3 = Color3.fromRGB(80, 180, 220)
-			b.Text = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({6825,10395,12180,11025,12390,10605})
-		end
-	end
-	local look = camera.CFrame.LookVector
-	yaw = math.atan2(-look.X, -look.Z)
-	pitch = math.asin(math.clamp(look.Y, -1, 1))
-	camera.CameraType = Enum.CameraType.Scriptable
-
-	inputConn = UserInputService.InputChanged:Connect(function(input, processed)
-		if processed or not controlling then return end
-		if input.UserInputType == Enum.UserInputType.MouseMovement then
-			yaw = yaw - input.Delta.X * M_SENS
-			pitch = math.clamp(pitch - input.Delta.Y * M_SENS, -1.2, 1.2)
-		elseif input.UserInputType == Enum.UserInputType.Touch then
-			yaw = yaw - input.Delta.X * T_SENS
-			pitch = math.clamp(pitch - input.Delta.Y * T_SENS, -1.2, 1.2)
-		end
-	end)
-
-	controlConn = RunService.RenderStepped:Connect(function()
-		if not controlling or not controlledPart or not controlledPart.Parent then
-			stopControl()
-			return
-		end
-		local dir = CFrame.fromEulerAnglesYXZ(pitch, yaw, 0).LookVector
-		pcall(function()
-			controlledPart.AssemblyLinearVelocity = dir * SPEED
-			controlledPart.AssemblyAngularVelocity = Vector3.zero
-		end)
-		local camPos = controlledPart.Position - dir * CAM_DIST + Vector3.new(0, CAM_H, 0)
-		camera.CFrame = CFrame.lookAt(camPos, controlledPart.Position + Vector3.new(0, 1.5, 0))
-	end)
+local function _aR(_aS)
+local _aP
+if _aS:IsA(string.char(77,111,100,101,108))then
+_aP=_aS.PrimaryPart or _aS:FindFirstChildWhichIsA(string.char(66,97,115,101,80,97,114,116))
+else
+_aP=_aS
+end
+if not _aP then return end
+_aw=_aP
+_av=true
+if _at then
+local _aJ=_at:FindFirstChild(string.char(83,107,121,76,105,110,103))
+if _aJ then
+_aJ.BackgroundColor3=Color3.fromRGB(80,180,220)
+_aJ.Text=string.char(65,99,116,105,118,101)
+end
+end
+local _aT=_6.CFrame.LookVector
+_aE=math.atan2(-_aT.X,-_aT.Z)
+_aF=math.asin(math.clamp(_aT.Y,-1,1))
+_6.CameraType=Enum.CameraType.Scriptable
+_ay=_0.InputChanged:Connect(function(_L,_aU)
+if _aU or not _av then return end
+if _L.UserInputType==Enum.UserInputType.MouseMovement then
+_aE=_aE-_L.Delta.X*_aC
+_aF=math.clamp(_aF-_L.Delta.Y*_aC,-1.2,1.2)
+elseif _L.UserInputType==Enum.UserInputType.Touch then
+_aE=_aE-_L.Delta.X*_aD
+_aF=math.clamp(_aF-_L.Delta.Y*_aD,-1.2,1.2)
+end
+end)
+_ax=_2.RenderStepped:Connect(function()
+if not _av or not _aw or not _aw.Parent then
+_aI()
+return
+end
+local _ao=CFrame.fromEulerAnglesYXZ(_aF,_aE,0).LookVector
+pcall(function()
+_aw.AssemblyLinearVelocity=_ao*_az
+_aw.AssemblyAngularVelocity=Vector3.zero
+end)
+local _aV=_aw.Position-_ao*_aA+Vector3.new(0,_aB,0)
+_6.CFrame=CFrame.lookAt(_aV,_aw.Position+Vector3.new(0,1.5,0))
+end)
 end
 
-local function createControlBall()
-	if CBGui then destroyControlBall() end
-	local old = LocalPlayer.PlayerGui:FindFirstChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815}))
-	if old then old:Destroy() end
-
-	local gui = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,10395,11970,10605,10605,11550,7455,12285,11025}))
-	gui.Name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815})
-	gui.ResetOnSpawn = false
-	gui.Parent = LocalPlayer:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8400,11340,10185,12705,10605,11970,7455,12285,11025}))
-	CBGui = gui
-
-	local btn = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,10605,12600,12180,6930,12285,12180,12180,11655,11550}))
-	btn.Name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815})
-	btn.Size = UDim2.new(0, 150, 0, 55)
-	btn.Position = UDim2.new(0.5, -75, 0.5, -27)
-	btn.BackgroundColor3 = Color3.fromRGB(137, 207, 240)
-	btn.TextColor3 = Color3.new(1, 1, 1)
-	btn.Text = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815})
-	btn.Font = Enum.Font.GothamBold
-	btn.TextSize = 18
-	btn.AutoButtonColor = false
-	btn.Parent = gui
-	Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8925,7665,7035,11655,11970,11550,10605,11970}), btn).CornerRadius = UDim.new(0, 12)
-
-	local dragging, dragStart, startPos, totalDrag = false, nil, nil, 0
-	table.insert(CBConnections, btn.InputBegan:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-			dragging = true
-			dragStart = input.Position
-			startPos = btn.Position
-			totalDrag = 0
-		end
-	end))
-	table.insert(CBConnections, btn.InputChanged:Connect(function(input)
-		if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-			local d = input.Position - dragStart
-			totalDrag = totalDrag + d.Magnitude
-			btn.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + d.X, startPos.Y.Scale, startPos.Y.Offset + d.Y)
-			dragStart = input.Position
-			startPos = btn.Position
-		end
-	end))
-	table.insert(CBConnections, btn.InputEnded:Connect(function(input)
-		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-			dragging = false
-			if totalDrag < 15 then
-				if controlling then
-					stopControl()
-				else
-					local found = getClosestTPS()
-					if found then startControl(found) end
-				end
-			end
-		end
-	end))
+local function _aW()
+if _at then _aK()end
+local _aX=_5.PlayerGui:FindFirstChild(string.char(83,107,121,76,105,110,103))
+if _aX then _aX:Destroy()end
+local _D=Instance.new(string.char(83,99,114,101,101,110,71,117,105))
+_D.Name=string.char(83,107,121,76,105,110,103)
+_D.ResetOnSpawn=false
+_D.Parent=_5:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))
+_at=_D
+local _G=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
+_G.Name=string.char(83,107,121,76,105,110,103)
+_G.Size=UDim2.new(0,150,0,55)
+_G.Position=UDim2.new(0.5,-75,0.5,-27)
+_G.BackgroundColor3=Color3.fromRGB(137,207,240)
+_G.TextColor3=Color3.new(1,1,1)
+_G.Text=string.char(83,107,121,76,105,110,103)
+_G.Font=Enum.Font.GothamBold
+_G.TextSize=18
+_G.AutoButtonColor=false
+_G.Parent=_D
+Instance.new(string.char(85,73,67,111,114,110,101,114),_G).CornerRadius=UDim.new(0,12)
+local _H,_J,_K,_aY=false,nil,nil,0
+table.insert(_au,_G.InputBegan:Connect(function(_L)
+if _L.UserInputType==Enum.UserInputType.MouseButton1 or _L.UserInputType==Enum.UserInputType.Touch then
+_H=true
+_J=_L.Position
+_K=_G.Position
+_aY=0
+end
+end))
+table.insert(_au,_G.InputChanged:Connect(function(_L)
+if _H and(_L.UserInputType==Enum.UserInputType.MouseMovement or _L.UserInputType==Enum.UserInputType.Touch)then
+local _N=_L.Position-_J
+_aY=_aY+_N.Magnitude
+_G.Position=UDim2.new(_K.X.Scale,_K.X.Offset+_N.X,_K.Y.Scale,_K.Y.Offset+_N.Y)
+_J=_L.Position
+_K=_G.Position
+end
+end))
+table.insert(_au,_G.InputEnded:Connect(function(_L)
+if _L.UserInputType==Enum.UserInputType.MouseButton1 or _L.UserInputType==Enum.UserInputType.Touch then
+_H=false
+if _aY<15 then
+if _av then _aI()else
+local _aZ=_aL()
+if _aZ then _aR(_aZ)end
+end
+end
+end
+end))
 end
 
-local function FindTPS()
-	for _, obj in ipairs(Workspace:GetDescendants()) do
-		if obj.Name == zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,8400,8715}) and obj:IsA(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({6930,10185,12075,10605,8400,10185,11970,12180})) then
-			return obj
-		end
-	end
-	return nil
+local function _b0()
+for _,_as in ipairs(_4:GetDescendants())do
+if _as.Name==string.char(84,80,83)and _as:IsA(string.char(66,97,115,101,80,97,114,116))then return _as end
+end
+return nil
 end
 
-RunService.RenderStepped:Connect(function()
-	if not PredictEnabled then
-		Line.Visible = false
-		Dot.Visible = false
-		return
-	end
-	if not TPS or not TPS.Parent then TPS = FindTPS() end
-	if not TPS then
-		Line.Visible = false
-		Dot.Visible = false
-		return
-	end
-	local velocity = TPS.AssemblyLinearVelocity
-	local predictedPosition = TPS.Position + velocity * PredictionTime
-	local currentPos, currentVisible = camera:WorldToViewportPoint(TPS.Position)
-	local predictedPos, predictedVisible = camera:WorldToViewportPoint(predictedPosition)
-	if currentVisible and predictedVisible then
-		Line.From = Vector2.new(currentPos.X, currentPos.Y)
-		Line.To = Vector2.new(predictedPos.X, predictedPos.Y)
-		Line.Visible = true
-		Dot.Position = Vector2.new(predictedPos.X, predictedPos.Y)
-		Dot.Visible = true
-	else
-		Line.Visible = false
-		Dot.Visible = false
-	end
+_2.RenderStepped:Connect(function()
+if not _e then
+_h.Visible=false
+_i.Visible=false
+return
+end
+if not _g or not _g.Parent then _g=_b0()end
+if not _g then
+_h.Visible=false
+_i.Visible=false
+return
+end
+local _b1=_g.AssemblyLinearVelocity
+local _b2=_g.Position+_b1*_f
+local _b3,_b4=_6:WorldToViewportPoint(_g.Position)
+local _b5,_b6=_6:WorldToViewportPoint(_b2)
+if _b4 and _b6 then
+_h.From=Vector2.new(_b3.X,_b3.Y)
+_h.To=Vector2.new(_b5.X,_b5.Y)
+_h.Visible=true
+_i.Position=Vector2.new(_b5.X,_b5.Y)
+_i.Visible=true
+else
+_h.Visible=false
+_i.Visible=false
+end
 end)
 
-local FireBallEnabled = false
-local FireBallSize = 5
-local FireBallHeat = 8
+local _b7=_8:AddTab({Title=string.char(82,101,97,99,104),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,51,52,57,53,48,48,50,48)})
+local _b8=_8:AddTab({Title=string.char(72,101,108,112,115),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,51,52,56,57,56,51,53,53)})
+local _b9=_8:AddTab({Title=string.char(86,105,115,117,97,108),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,51,52,57,49,50,51,50,50)})
+local _ba=_8:AddTab({Title=string.char(83,101,116,116,105,110,103,115),Section=string.char(83,101,116,116,105,110,103,115),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,49,50,57,51,57,55,55,54,49,48)})
 
-local function addFireToTPS(object)
-	if not object:FindFirstChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7350,11025,11970,10605})) then
-		local fire = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7350,11025,11970,10605}))
-		fire.Size = FireBallSize
-		fire.Heat = FireBallHeat
-		fire.Parent = object
-	end
+_8:AddToggle({Title=string.char(82,101,97,99,104),Tab=_b7,Callback=function(_bb)_a.isActive=_bb end})
+_8:AddSlider({Title=string.char(82,101,97,99,104,32,68,105,115,116,97,110,99,101),Tab=_b7,MaxValue=10,Callback=function(_bb)_a.reach=_bb end})
+_8:AddToggle({Title=string.char(84,111,116,32,40,77,111,98,105,108,101,41),Tab=_b8,Callback=function(_bb)if _bb then _C()else _A()end end})
+_8:AddToggle({Title=string.char(67,111,110,116,114,111,108,32,66,97,108,108,32,40,77,111,98,105,108,101,41),Tab=_b8,Callback=function(_bb)if _bb then _aW()else _aK()end end})
+_8:AddToggle({Title=string.char(65,117,116,111,32,72,97,109,98,111,108,111,32,40,80,67,41),Tab=_b8,Callback=function(_bb)_aq(_bb)end})
+_8:AddKeybind({Title=string.char(65,117,116,111,32,72,97,109,98,111,108,111,32,75,101,121,98,105,110,100),Tab=_b8,Callback=function(_bb)
+if typeof(_bb)==string.char(69,110,117,109,73,116,101,109)then _b.ToggleKey=_bb
+elseif type(_bb)==string.char(115,116,114,105,110,103)then _b.ToggleKey=Enum.KeyCode[_bb]or Enum.KeyCode.R end
+end})
+_8:AddToggle({Title=string.char(80,114,101,100,105,99,116,32,66,97,108,108),Tab=_b9,Callback=function(_bb)
+_e=_bb
+if not _bb then
+_h.Visible=false
+_i.Visible=false
 end
-
-local mouse = LocalPlayer:GetMouse()
-
-mouse.Button1Down:Connect(function()
-	if not FireBallEnabled then return end
-	local target = mouse.Target
-	if target and target.Name == zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,8400,8715}) then
-		addFireToTPS(target)
-	end
-end)
-
-UserInputService.TouchTap:Connect(function()
-	if not FireBallEnabled then return end
-	local target = mouse.Target
-	if target and target.Name == zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,8400,8715}) then
-		addFireToTPS(target)
-	end
-end)
-
-getgenv().Resolution = { [zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({4830,10815,10815,4935,12075,10395,11970,11025,11760,12180,10605,11970,12075})] = 0.65 }
-local StretchCamera = workspace.CurrentCamera
-local stretchConnection = nil
-local stretchValue = 0.65
-
-local function startStretch()
-	if stretchConnection then return end
-	stretchConnection = RunService.RenderStepped:Connect(function()
-		StretchCamera.CFrame = StretchCamera.CFrame * CFrame.new(0, 0, 0, 1, 0, 0, 0, stretchValue, 0, 0, 0, 1)
-	end)
-end
-
-local function stopStretch()
-	if stretchConnection then
-		stretchConnection:Disconnect()
-		stretchConnection = nil
-	end
-end
-
-local AB_following = false
-local AB_currentTarget = nil
-local AB_char = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
-local AB_humanoid = AB_char:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7560,12285,11445,10185,11550,11655,11025,10500}))
-local AB_rootPart = AB_char:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7560,12285,11445,10185,11550,11655,11025,10500,8610,11655,11655,12180,8400,10185,11970,12180}))
-local FOLLOW_SPEED = 17
-local MAX_DISTANCE = 150
-
-local ABScreenGui = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,10395,11970,10605,10605,11550,7455,12285,11025}))
-ABScreenGui.Name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,8400,8715,7350,11655,11340,11340,11655,12495,8925,7665})
-ABScreenGui.ResetOnSpawn = false
-ABScreenGui.IgnoreGuiInset = true
-ABScreenGui.Parent = LocalPlayer:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8400,11340,10185,12705,10605,11970,7455,12285,11025}))
-
-local AB_button = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,10605,12600,12180,6930,12285,12180,12180,11655,11550}))
-AB_button.Name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7350,11655,11340,11340,11655,12495,6930,12285,12180,12180,11655,11550})
-AB_button.Size = UDim2.new(0, 80, 0, 80)
-AB_button.Position = UDim2.new(0.82, 0, 0.68, 0)
-AB_button.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
-AB_button.BorderSizePixel = 0
-AB_button.Text = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7350,8295,7980,7980,8295,9135})
-AB_button.TextColor3 = Color3.fromRGB(255, 255, 255)
-AB_button.TextScaled = true
-AB_button.Font = Enum.Font.GothamBold
-AB_button.AutoButtonColor = false
-AB_button.Parent = ABScreenGui
-
-local AB_corner = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8925,7665,7035,11655,11970,11550,10605,11970}))
-AB_corner.CornerRadius = UDim.new(0, 16)
-AB_corner.Parent = AB_button
-
-local AB_stroke = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8925,7665,8715,12180,11970,11655,11235,10605}))
-AB_stroke.Thickness = 2
-AB_stroke.Color = Color3.fromRGB(80, 80, 80)
-AB_stroke.Parent = AB_button
-
-local function AB_validTPS(tps)
-	return tps and tps.Parent and tps:IsA(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({6930,10185,12075,10605,8400,10185,11970,12180})) and tps.Name == zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,8400,8715}) and tps:IsDescendantOf(Workspace)
-end
-
-local function AB_getClosestTPS()
-	local closest = nil
-	local closestDistance = math.huge
-	for _, object in ipairs(Workspace:GetDescendants()) do
-		if object:IsA(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({6930,10185,12075,10605,8400,10185,11970,12180})) and object.Name == zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,8400,8715}) then
-			local distance = (object.Position - AB_rootPart.Position).Magnitude
-			if distance <= MAX_DISTANCE and distance < closestDistance then
-				closestDistance = distance
-				closest = object
-			end
-		end
-	end
-	return closest
-end
-
-local function AB_updateButton()
-	if AB_following then
-		AB_button.Text = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8295,8190})
-		AB_button.BackgroundColor3 = Color3.fromRGB(35, 120, 55)
-		AB_stroke.Color = Color3.fromRGB(80, 255, 100)
-	else
-		AB_button.Text = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7350,8295,7980,7980,8295,9135})
-		AB_button.BackgroundColor3 = Color3.fromRGB(18, 18, 18)
-		AB_stroke.Color = Color3.fromRGB(80, 80, 80)
-	end
-end
-
-local function AB_startFollowing()
-	local target = AB_getClosestTPS()
-	if not target then return end
-	AB_currentTarget = target
-	AB_following = true
-	AB_humanoid.WalkSpeed = FOLLOW_SPEED
-	AB_updateButton()
-end
-
-local function AB_stopFollowing()
-	AB_following = false
-	AB_currentTarget = nil
-	if AB_humanoid and AB_humanoid.Parent then
-		AB_humanoid.WalkSpeed = FOLLOW_SPEED
-	end
-	AB_updateButton()
-end
-
-AB_button.MouseButton1Click:Connect(function()
-	if AB_following then
-		AB_stopFollowing()
-	else
-		AB_startFollowing()
-	end
-end)
-
-RunService.RenderStepped:Connect(function()
-	if not AB_following then return end
-	if not AB_char or not AB_char.Parent then return end
-	if not AB_humanoid or AB_humanoid.Health <= 0 then return end
-	if not AB_rootPart or not AB_rootPart.Parent then return end
-	if not AB_validTPS(AB_currentTarget) then
-		AB_stopFollowing()
-		return
-	end
-	AB_humanoid.WalkSpeed = FOLLOW_SPEED
-	local targetPosition = AB_currentTarget.Position
-	local difference = targetPosition - AB_rootPart.Position
-	local horizontal = Vector3.new(difference.X, 0, difference.Z)
-	if horizontal.Magnitude <= 0.15 then return end
-	local targetDirection = horizontal.Unit
-	local playerDirection = AB_humanoid.MoveDirection
-	if playerDirection.Magnitude > 0.05 then
-		local dot = playerDirection.Unit:Dot(targetDirection)
-		if dot > 0.5 then return end
-		AB_humanoid:Move(playerDirection, false)
-		return
-	end
-	AB_humanoid:Move(targetDirection, false)
-end)
-
-local AB_dragging = false
-local AB_dragStart = nil
-local AB_startPosition = nil
-local AB_dragInput = nil
-
-local function AB_updateDrag(input)
-	local delta = input.Position - AB_dragStart
-	AB_button.Position = UDim2.new(
-		AB_startPosition.X.Scale,
-		AB_startPosition.X.Offset + delta.X,
-		AB_startPosition.Y.Scale,
-		AB_startPosition.Y.Offset + delta.Y
-	)
-end
-
-AB_button.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		AB_dragging = true
-		AB_dragStart = input.Position
-		AB_startPosition = AB_button.Position
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				AB_dragging = false
-			end
-		end)
-	end
-end)
-
-AB_button.InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-		AB_dragInput = input
-	end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-	if AB_dragging and input == AB_dragInput then
-		AB_updateDrag(input)
-	end
-end)
-
-LocalPlayer.CharacterAdded:Connect(function(newCharacter)
-	AB_char = newCharacter
-	AB_humanoid = AB_char:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7560,12285,11445,10185,11550,11655,11025,10500}))
-	AB_rootPart = AB_char:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7560,12285,11445,10185,11550,11655,11025,10500,8610,11655,11655,12180,8400,10185,11970,12180}))
-	AB_following = false
-	AB_currentTarget = nil
-	AB_humanoid.WalkSpeed = FOLLOW_SPEED
-	AB_updateButton()
-end)
-
-local PowerShootEnabled = false
-local PS_HEIGHT = 10
-local PS_SPEED = 10
-
-local PSScreenGui = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,10395,11970,10605,10605,11550,7455,12285,11025}))
-PSScreenGui.Name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815,8400,11655,12495,10605,11970,7455,12285,11025})
-PSScreenGui.ResetOnSpawn = false
-PSScreenGui.Enabled = false
-PSScreenGui.Parent = LocalPlayer:WaitForChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8400,11340,10185,12705,10605,11970,7455,12285,11025}))
-
-local PS_button = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8820,10605,12600,12180,6930,12285,12180,12180,11655,11550}))
-PS_button.Name = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815,8400,11655,12495,10605,11970})
-PS_button.Size = UDim2.new(0, 110, 0, 40)
-PS_button.Position = UDim2.new(0.85, 0, 0.15, 0)
-PS_button.BackgroundColor3 = Color3.fromRGB(135, 206, 250)
-PS_button.TextColor3 = Color3.fromRGB(255, 255, 255)
-PS_button.Text = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815})
-PS_button.Font = Enum.Font.GothamBold
-PS_button.TextSize = 16
-PS_button.AutoButtonColor = true
-PS_button.Parent = PSScreenGui
-
-local PS_corner = Instance.new(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8925,7665,7035,11655,11970,11550,10605,11970}))
-PS_corner.CornerRadius = UDim.new(0, 8)
-PS_corner.Parent = PS_button
-
-local PS_dragging = false
-local PS_dragStart = nil
-local PS_startPos = nil
-local PS_hasDragged = false
-
-PS_button.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		PS_dragging = true
-		PS_hasDragged = false
-		PS_dragStart = input.Position
-		PS_startPos = PS_button.Position
-	end
-end)
-
-PS_button.InputEnded:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		PS_dragging = false
-		if not PS_hasDragged then
-			PowerShootEnabled = not PowerShootEnabled
-			if PowerShootEnabled then
-				PS_button.BackgroundColor3 = Color3.fromRGB(70, 160, 220)
-				PS_button.Text = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815,3360,8295,8190})
-			else
-				PS_button.BackgroundColor3 = Color3.fromRGB(135, 206, 250)
-				PS_button.Text = zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,11235,12705,7980,11025,11550,10815})
-			end
-		end
-	end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-	if PS_dragging and (input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch) then
-		local delta = input.Position - PS_dragStart
-		if math.abs(delta.X) > 5 or math.abs(delta.Y) > 5 then
-			PS_hasDragged = true
-		end
-		PS_button.Position = UDim2.new(PS_startPos.X.Scale, PS_startPos.X.Offset + delta.X, PS_startPos.Y.Scale, PS_startPos.Y.Offset + delta.Y)
-	end
-end)
-
-local function PS_isInAir(part)
-	local rayOrigin = part.Position
-	local rayDirection = Vector3.new(0, -5, 0)
-	local raycastParams = RaycastParams.new()
-	raycastParams.FilterDescendantsInstances = {part}
-	raycastParams.FilterType = Enum.RaycastFilterType.Exclude
-	local result = workspace:Raycast(rayOrigin, rayDirection, raycastParams)
-	return result == nil
-end
-
-local function PS_hasToolEquipped()
-	local character = LocalPlayer.Character
-	if not character then return false end
-	if character:FindFirstChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({8715,10920,11655,11655,12180})) or character:FindFirstChild(zgAGMgRdsELLFbbrEoaOCfHcUNQjxZTWHwPrjppYsyDFeQgzUUgy({7980,11655,11550,10815})) then
-		return true
-	end
-	return false
-end
-
-task.spawn(function()
-while true do
-		task.wait(0.1)
-		if PowerShootEnabled and PS_hasToolEquipped() then
-			local TPSpart = workspace:FindFirstChild(oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8820,8400,8715}))
-			if TPSpart and TPSpart:IsA(oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({6930,10185,12075,10605,8400,10185,11970,12180})) and TPSpart.Parent then
-				if PS_isInAir(TPSpart) then
-					local vel = TPSpart.AssemblyLinearVelocity
-					local horizontal = Vector3.new(vel.X, 0, vel.Z)
-					if horizontal.Magnitude > 0.5 then
-						local dir = horizontal.Unit
-						TPSpart.AssemblyLinearVelocity = vel + (dir * PS_SPEED)
-					else
-						TPSpart.AssemblyLinearVelocity = vel + (TPSpart.CFrame.LookVector * PS_SPEED)
-					end
-					TPSpart.CFrame = TPSpart.CFrame + Vector3.new(0, PS_HEIGHT * 0.05, 0)
-				end
-			end
-		end
-	end
-end)
-
-local ReachTab = Window:AddTab({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8610,10605,10185,10395,10920}),
-	Section = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8085,10185,11025,11550}),
-	Icon = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({11970,10290,12600,10185,12075,12075,10605,12180,11025,10500,6090,4935,4935,5145,5040,5775,5355,5460,5985,5565,5040,5040,5250,5040})
-})
-
-local HelpsTab = Window:AddTab({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7560,10605,11340,11760,12075}),
-	Section = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8085,10185,11025,11550}),
-	Icon = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({11970,10290,12600,10185,12075,12075,10605,12180,11025,10500,6090,4935,4935,5145,5040,5775,5355,5460,5880,5985,5880,5355,5565,5565})
-})
-
-local VisualTab = Window:AddTab({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({9030,11025,12075,12285,10185,11340}),
-	Section = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8085,10185,11025,11550}),
-	Icon = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({11970,10290,12600,10185,12075,12075,10605,12180,11025,10500,6090,4935,4935,5145,5040,5775,5355,5460,5985,5145,5250,5355,5250,5250})
-})
-
-local BallTab = Window:AddTab({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({6930,10185,11340,11340}),
-	Section = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8085,10185,11025,11550}),
-	Icon = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({11970,10290,12600,10185,12075,12075,10605,12180,11025,10500,6090,4935,4935,5145,5040,5775,5355,5460,5985,5250,5880,5670,5040,5670})
-})
-
-local MiscTab = Window:AddTab({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8085,11025,12075,10395}),
-	Section = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8085,10185,11025,11550}),
-	Icon = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({11970,10290,12600,10185,12075,12075,10605,12180,11025,10500,6090,4935,4935,5145,5040,5775,5040,5985,5775,5985,5040,5670,5460,5460})
-})
-
-local SettingsTab = Window:AddTab({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8715,10605,12180,12180,11025,11550,10815,12075}),
-	Section = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8715,10605,12180,12180,11025,11550,10815,12075}),
-	Icon = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({11970,10290,12600,10185,12075,12075,10605,12180,11025,10500,6090,4935,4935,5145,5145,5250,5985,5355,5985,5775,5775,5670,5145,5040})
-})
-
-Window:AddToggle({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8610,10605,10185,10395,10920}),
-	Tab = ReachTab,
-	Callback = function(v)
-		ReachConfig.isActive = v
-	end,
-})
-
-Window:AddSlider({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8610,10605,10185,10395,10920,3360,7140,11025,12075,12180,10185,11550,10395,10605}),
-	Tab = ReachTab,
-	MaxValue = 10,
-	Callback = function(v)
-		ReachConfig.reach = v
-	end,
-})
-
-Window:AddToggle({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8820,11655,12180,3360,4200,8085,11655,10290,11025,11340,10605,4305}),
-	Tab = HelpsTab,
-	Callback = function(v)
-		if v then createTot() else destroyTot() end
-	end,
-})
-
-Window:AddToggle({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7035,11655,11550,12180,11970,11655,11340,3360,6930,10185,11340,11340,3360,4200,8085,11655,10290,11025,11340,10605,4305}),
-	Tab = HelpsTab,
-	Callback = function(v)
-		if v then createControlBall() else destroyControlBall() end
-	end,
-})
-
-Window:AddToggle({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({6825,12285,12180,11655,3360,7560,10185,11445,10290,11655,11340,11655,3360,4200,8400,7035,4305}),
-	Tab = HelpsTab,
-	Callback = function(v)
-		setAuto(v)
-	end,
-})
-
-Window:AddKeybind({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({6825,12285,12180,11655,3360,7560,10185,11445,10290,11655,11340,11655,3360,7875,10605,12705,10290,11025,11550,10500}),
-	Tab = HelpsTab,
-	Callback = function(v)
-		if typeof(v) == oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7245,11550,12285,11445,7665,12180,10605,11445}) then
-			AutoConfig.ToggleKey = v
-		elseif type(v) == oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({12075,12180,11970,11025,11550,10815}) then
-			AutoConfig.ToggleKey = Enum.KeyCode[v] or Enum.KeyCode.R
-		end
-	end,
-})
-
-Window:AddToggle({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({6825,12285,12180,11655,3360,6930,10185,11340,11340,3360,4200,6930,10605,12180,10185,4305}),
-	Tab = HelpsTab,
-	Callback = function(v)
-		if v then
-			if not AB_following then AB_startFollowing() end
-		else
-			if AB_following then AB_stopFollowing() end
-		end
-	end,
-})
-
-Window:AddToggle({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8400,11970,10605,10500,11025,10395,12180,3360,6930,10185,11340,11340}),
-	Tab = VisualTab,
-	Callback = function(v)
-		PredictEnabled = v
-		if not v then
-			Line.Visible = false
-			Dot.Visible = false
-		end
-	end,
-})
-
-Window:AddToggle({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7350,11025,11970,10605,3360,6930,10185,11340,11340}),
-	Description = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8820,11655,12285,10395,10920,3360,7350,11025,11550,10815,10605,11970,3360,8820,10920,10605,3360,6930,10185,11340,11340,3360,7350,11655,11970,3360,12495,11655,11970,11235}),
-	Tab = VisualTab,
-	Callback = function(v)
-		FireBallEnabled = v
-	end,
-})
-
-Window:AddSlider({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7350,11025,11970,10605,3360,6930,10185,11340,11340,3360,8715,11025,12810,10605}),
-	Tab = VisualTab,
-	MaxValue = 20,
-	Callback = function(v)
-		FireBallSize = v
-		for _, obj in ipairs(Workspace:GetDescendants()) do
-			if obj.Name == oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8820,8400,8715}) and obj:FindFirstChild(oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7350,11025,11970,10605})) then
-				obj.Fire.Size = v
-			end
-		end
-	end,
-})
-
-Window:AddSlider({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7350,11025,11970,10605,3360,6930,10185,11340,11340,3360,7560,10605,10185,12180}),
-	Tab = VisualTab,
-	MaxValue = 20,
-	Callback = function(v)
-		FireBallHeat = v
-		for _, obj in ipairs(Workspace:GetDescendants()) do
-			if obj.Name == oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8820,8400,8715}) and obj:FindFirstChild(oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7350,11025,11970,10605})) then
-				obj.Fire.Heat = v
-			end
-		end
-	end,
-})
-
-Window:AddToggle({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8400,11655,12495,10605,11970,3360,8715,10920,11655,11655,12180,3360,4200,8085,11655,12075,12180,3360,8295,11760,4305}),
-	Tab = BallTab,
-	Callback = function(v)
-		PowerShootEnabled = v
-		PSScreenGui.Enabled = v
-		if v then
-			PS_button.BackgroundColor3 = Color3.fromRGB(70, 160, 220)
-			PS_button.Text = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8715,11235,12705,7980,11025,11550,10815,3360,8295,8190})
-		else
-			PS_button.BackgroundColor3 = Color3.fromRGB(135, 206, 250)
-			PS_button.Text = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8715,11235,12705,7980,11025,11550,10815})
-		end
-	end,
-})
-
-Window:AddToggle({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8715,12180,11970,10605,12180,10395,10920,10605,10500,3360,8715,10395,11970,10605,10605,11550}),
-	Tab = MiscTab,
-	Callback = function(v)
-		if v then startStretch() else stopStretch() end
-	end,
-})
-
-Window:AddSlider({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8715,12180,11970,10605,12180,10395,10920,10605,10500,3360,8610,10605,12075,11655,11340,12285,12180,11025,11655,11550}),
-	Tab = MiscTab,
-	MaxValue = 90,
-	Callback = function(v)
-		if v <= 0 then v = 1 end
-		stretchValue = v / 100
-	end,
-})
-
-Window:AddKeybind({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8085,11025,11550,11025,11445,11025,12810,10605,3360,7875,10605,12705,10290,11025,11550,10500}),
-	Tab = SettingsTab,
-	Callback = function(Key)
-		Window:SetSetting(oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7875,10605,12705,10290,11025,11550,10500}), Key)
-	end,
-})
-
-Window:AddDropdown({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8715,10605,12180,3360,8820,10920,10605,11445,10605}),
-	Tab = SettingsTab,
-	Options = {
-		[oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7980,11025,10815,10920,12180,3360,8085,11655,10500,10605})] = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7980,11025,10815,10920,12180}),
-		[oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7140,10185,11970,11235,3360,8085,11655,10500,10605})] = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7140,10185,11970,11235}),
-		[oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({7245,12600,12180,11970,10185,3360,7140,10185,11970,11235})] = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({9030,11655,11025,10500}),
-	},
-	Callback = function(Theme)
-		Window:SetTheme(Themes[Theme])
-	end,
-})
-
-Window:AddToggle({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8925,7665,3360,6930,11340,12285,11970}),
-	Tab = SettingsTab,
-	Default = true,
-	Callback = function(Boolean)
-		Window:SetSetting(oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({6930,11340,12285,11970}), Boolean)
-	end,
-})
-
-Window:AddSlider({
-	Title = oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8925,7665,3360,8820,11970,10185,11550,12075,11760,10185,11970,10605,11550,10395,12705}),
-	Tab = SettingsTab,
-	MaxValue = 1,
-	Callback = function(Amount)
-		Window:SetSetting(oPWrNHvZHeBvNBTdbbrBvcJWjiivnfupykkMxhmUqGUMneQYqvVweMkUXiMisclaITFtYAiq({8820,11970,10185,11550,12075,11760,10185,11970,10605,11550,10395,12705}), Amount)
-	end,
-})    
-		
+end})
+_8:AddKeybind({Title=string.char(77,105,110,105,109,105,122,101,32,75,101,121,98,105,110,100),Tab=_ba,Callback=function(_bc)_8:SetSetting(string.char(75,101,121,98,105,110,100),_bc)end})
+_8:AddDropdown({Title=string.char(83,101,116,32,84,104,101,109,101),Tab=_ba,Options={[string.char(76,105,103,104,116,32,77,111,100,101)]=string.char(76,105,103,104,116),[string.char(68,97,114,107,32,77,111,100,101)]=string.char(68,97,114,107),[string.char(69,120,116,114,97,32,68,97,114,107)]=string.char(86,111,105,100)},Callback=function(_bd)_8:SetTheme(_9[_bd])end})
+_8:AddToggle({Title=string.char(85,73,32,66,108,117,114),Tab=_ba,Default=true,Callback=function(_be)_8:SetSetting(string.char(66,108,117,114),_be)end})
+_8:AddSlider({Title=string.char(85,73,32,84,114,97,110,115,112,97,114,101,110,99,121),Tab=_ba,MaxValue=1,Callback=function(_bf)_8:SetSetting(string.char(84,114,97,110,115,112,97,114,101,110,99,121),_bf)end})
