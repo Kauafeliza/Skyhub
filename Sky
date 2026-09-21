@@ -82,7 +82,9 @@ _i.Color=Color3.fromRGB(255,60,60)
 local function _j(_k)
 local _l={}
 for _,_m in ipairs(_4:GetDescendants())do
-if _m:IsA(string.char(66,97,115,101,80,97,114,116))and _m.Name==_k then table.insert(_l,_m)end
+if _m:IsA(string.char(66,97,115,101,80,97,114,116))and _m.Name==_k then
+table.insert(_l,_m)
+end
 end
 return _l
 end
@@ -130,12 +132,17 @@ local function _A()
 for _,_B in ipairs(_z)do pcall(function()_B:Disconnect()end)end
 table.clear(_z)
 if _y then _y:Destroy()_y=nil end
-pcall(function()require(_5.PlayerScripts:WaitForChild(string.char(80,108,97,121,101,114,77,111,100,117,108,101))):GetControls():Enable()end)
+pcall(function()
+require(_5.PlayerScripts:WaitForChild(string.char(80,108,97,121,101,114,77,111,100,117,108,101))):GetControls():Enable()
+end)
 end
 
 local function _C()
 if _y then _A()end
-pcall(function()require(_5.PlayerScripts:WaitForChild(string.char(80,108,97,121,101,114,77,111,100,117,108,101))):GetControls():Disable()end)
+pcall(function()
+require(_5.PlayerScripts:WaitForChild(string.char(80,108,97,121,101,114,77,111,100,117,108,101))):GetControls():Disable()
+end)
+
 local _D=Instance.new(string.char(83,99,114,101,101,110,71,117,105))
 _D.Name=string.char(77,111,98,105,108,101,75,101,121,98,105,110,100,71,117,105)
 _D.ResetOnSpawn=false
@@ -143,7 +150,9 @@ _D.IgnoreGuiInset=true
 _D.DisplayOrder=999
 _D.Parent=_5:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))
 _y=_D
+
 local _E={{name=string.char(82),key=Enum.KeyCode.R},{name=string.char(84),key=Enum.KeyCode.T}}
+
 local function _F(_G)
 local _H,_I,_J,_K
 table.insert(_z,_G.InputBegan:Connect(function(_L)
@@ -153,12 +162,17 @@ _J=_L.Position
 _K=_G.Position
 local _M
 _M=_L.Changed:Connect(function()
-if _L.UserInputState==Enum.UserInputState.End then _H=false _M:Disconnect()end
+if _L.UserInputState==Enum.UserInputState.End then
+_H=false
+_M:Disconnect()
+end
 end)
 end
 end))
 table.insert(_z,_G.InputChanged:Connect(function(_L)
-if _L.UserInputType==Enum.UserInputType.MouseMovement or _L.UserInputType==Enum.UserInputType.Touch then _I=_L end
+if _L.UserInputType==Enum.UserInputType.MouseMovement or _L.UserInputType==Enum.UserInputType.Touch then
+_I=_L
+end
 end))
 table.insert(_z,_0.InputChanged:Connect(function(_L)
 if _L==_I and _H then
@@ -167,6 +181,7 @@ _G.Position=UDim2.new(_K.X.Scale,_K.X.Offset+_N.X,_K.Y.Scale,_K.Y.Offset+_N.Y)
 end
 end))
 end
+
 for _O,_P in ipairs(_E)do
 local _G=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
 _G.Size=UDim2.new(0,60,0,60)
@@ -181,6 +196,7 @@ _G.AutoButtonColor=false
 _G.Parent=_D
 Instance.new(string.char(85,73,67,111,114,110,101,114),_G).CornerRadius=UDim.new(1,0)
 _F(_G)
+
 local _Q,_R,_S=false,false,Vector2.zero
 table.insert(_z,_G.InputBegan:Connect(function(_L)
 if _L.UserInputType==Enum.UserInputType.MouseButton1 or _L.UserInputType==Enum.UserInputType.Touch then
@@ -189,7 +205,9 @@ _S=_L.Position
 end
 end))
 table.insert(_z,_G.InputChanged:Connect(function(_L)
-if(_L.UserInputType==Enum.UserInputType.MouseMovement or _L.UserInputType==Enum.UserInputType.Touch)and(_L.Position-_S).Magnitude>8 then _R=true end
+if(_L.UserInputType==Enum.UserInputType.MouseMovement or _L.UserInputType==Enum.UserInputType.Touch)and(_L.Position-_S).Magnitude>8 then
+_R=true
+end
 end))
 table.insert(_z,_G.MouseButton1Click:Connect(function()
 if _R then return end
@@ -204,19 +222,32 @@ _3:SendKeyEvent(true,_P.key,false,game)
 end
 end))
 end
+
 local _T=Instance.new(string.char(73,109,97,103,101,66,117,116,116,111,110))
 _T.Size=UDim2.new(0,70,0,70)
 _T.Position=UDim2.new(1,-100,1,-95)
 _T.BackgroundTransparency=1
 _T.Image=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,50,48,57,55,54,52,56,49,54,55,55,55,54,51)
 _T.Parent=_D
+
 local _U,_V=false,nil
-local function _W(_o)_V=_o:WaitForChild(string.char(72,117,109,97,110,111,105,100))end
+local function _W(_o)
+_V=_o:WaitForChild(string.char(72,117,109,97,110,111,105,100))
+end
 if _5.Character then _W(_5.Character)end
 table.insert(_z,_5.CharacterAdded:Connect(_W))
-table.insert(_z,_2.RenderStepped:Connect(function()if _U and _V then _V.Jump=true end end))
-table.insert(_z,_T.MouseButton1Down:Connect(function()_U=true _T.ImageColor3=Color3.fromRGB(150,150,150)end))
-table.insert(_z,_T.MouseButton1Up:Connect(function()_U=false _T.ImageColor3=Color3.new(1,1,1)end))
+table.insert(_z,_2.RenderStepped:Connect(function()
+if _U and _V then _V.Jump=true end
+end))
+table.insert(_z,_T.MouseButton1Down:Connect(function()
+_U=true
+_T.ImageColor3=Color3.fromRGB(150,150,150)
+end))
+table.insert(_z,_T.MouseButton1Up:Connect(function()
+_U=false
+_T.ImageColor3=Color3.new(1,1,1)
+end))
+
 local _X,_Y=45,220
 local _Z=Instance.new(string.char(70,114,97,109,101))
 _Z.Size=UDim2.new(0,_Y,0,_Y)
@@ -224,6 +255,7 @@ _Z.Position=UDim2.new(0,20,1,-20-_Y)
 _Z.BackgroundTransparency=1
 _Z.Active=true
 _Z.Parent=_D
+
 local __=Instance.new(string.char(70,114,97,109,101))
 __.Size=UDim2.new(0,34,0,34)
 __.AnchorPoint=Vector2.new(0.5,0.5)
@@ -232,10 +264,14 @@ __.BackgroundColor3=Color3.new(0,0,0)
 __.BackgroundTransparency=0.35
 __.Parent=_Z
 Instance.new(string.char(85,73,67,111,114,110,101,114),__).CornerRadius=UDim.new(1,0)
+
 local _aa,_ab,_ac,_ad=false,nil,Vector3.zero,nil
-local function _ae(_o)_ad=_o:WaitForChild(string.char(72,117,109,97,110,111,105,100))end
+local function _ae(_o)
+_ad=_o:WaitForChild(string.char(72,117,109,97,110,111,105,100))
+end
 if _5.Character then _ae(_5.Character)end
 table.insert(_z,_5.CharacterAdded:Connect(_ae))
+
 table.insert(_z,_Z.InputBegan:Connect(function(_L,_af)
 if _af then return end
 if _L.UserInputType==Enum.UserInputType.Touch or _L.UserInputType==Enum.UserInputType.MouseButton1 then
@@ -312,7 +348,9 @@ end
 
 _0.InputBegan:Connect(function(_L,_af)
 if _af then return end
-if _L.KeyCode==_b.ToggleKey then _aq(not _b.isActive)end
+if _L.KeyCode==_b.ToggleKey then
+_aq(not _b.isActive)
+end
 end)
 
 local _at,_au=nil,{}
@@ -361,7 +399,10 @@ _aP=_as
 end
 if _aP then
 local _aQ=(_aP.Position-_aM.Position).Magnitude
-if _aQ<_aO then _aO=_aQ _aN=_as end
+if _aQ<_aO then
+_aO=_aQ
+_aN=_as
+end
 end
 end
 end
@@ -389,6 +430,7 @@ local _aT=_6.CFrame.LookVector
 _aE=math.atan2(-_aT.X,-_aT.Z)
 _aF=math.asin(math.clamp(_aT.Y,-1,1))
 _6.CameraType=Enum.CameraType.Scriptable
+
 _ay=_0.InputChanged:Connect(function(_L,_aU)
 if _aU or not _av then return end
 if _L.UserInputType==Enum.UserInputType.MouseMovement then
@@ -399,6 +441,7 @@ _aE=_aE-_L.Delta.X*_aD
 _aF=math.clamp(_aF-_L.Delta.Y*_aD,-1.2,1.2)
 end
 end)
+
 _ax=_2.RenderStepped:Connect(function()
 if not _av or not _aw or not _aw.Parent then
 _aI()
@@ -418,11 +461,13 @@ local function _aW()
 if _at then _aK()end
 local _aX=_5.PlayerGui:FindFirstChild(string.char(83,107,121,76,105,110,103))
 if _aX then _aX:Destroy()end
+
 local _D=Instance.new(string.char(83,99,114,101,101,110,71,117,105))
 _D.Name=string.char(83,107,121,76,105,110,103)
 _D.ResetOnSpawn=false
 _D.Parent=_5:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))
 _at=_D
+
 local _G=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
 _G.Name=string.char(83,107,121,76,105,110,103)
 _G.Size=UDim2.new(0,150,0,55)
@@ -435,6 +480,7 @@ _G.TextSize=18
 _G.AutoButtonColor=false
 _G.Parent=_D
 Instance.new(string.char(85,73,67,111,114,110,101,114),_G).CornerRadius=UDim.new(0,12)
+
 local _H,_J,_K,_aY=false,nil,nil,0
 table.insert(_au,_G.InputBegan:Connect(function(_L)
 if _L.UserInputType==Enum.UserInputType.MouseButton1 or _L.UserInputType==Enum.UserInputType.Touch then
@@ -457,7 +503,9 @@ table.insert(_au,_G.InputEnded:Connect(function(_L)
 if _L.UserInputType==Enum.UserInputType.MouseButton1 or _L.UserInputType==Enum.UserInputType.Touch then
 _H=false
 if _aY<15 then
-if _av then _aI()else
+if _av then
+_aI()
+else
 local _aZ=_aL()
 if _aZ then _aR(_aZ)end
 end
@@ -468,7 +516,9 @@ end
 
 local function _b0()
 for _,_as in ipairs(_4:GetDescendants())do
-if _as.Name==string.char(84,80,83)and _as:IsA(string.char(66,97,115,101,80,97,114,116))then return _as end
+if _as.Name==string.char(84,80,83)and _as:IsA(string.char(66,97,115,101,80,97,114,116))then
+return _as
+end
 end
 return nil
 end
@@ -479,7 +529,9 @@ _h.Visible=false
 _i.Visible=false
 return
 end
-if not _g or not _g.Parent then _g=_b0()end
+if not _g or not _g.Parent then
+_g=_b0()
+end
 if not _g then
 _h.Visible=false
 _i.Visible=false
@@ -501,28 +553,394 @@ _i.Visible=false
 end
 end)
 
-local _b7=_8:AddTab({Title=string.char(82,101,97,99,104),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,51,52,57,53,48,48,50,48)})
-local _b8=_8:AddTab({Title=string.char(72,101,108,112,115),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,51,52,56,57,56,51,53,53)})
-local _b9=_8:AddTab({Title=string.char(86,105,115,117,97,108),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,51,52,57,49,50,51,50,50)})
-local _ba=_8:AddTab({Title=string.char(83,101,116,116,105,110,103,115),Section=string.char(83,101,116,116,105,110,103,115),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,49,50,57,51,57,55,55,54,49,48)})
+local _b7=false
+local _b8=5
+local _b9=8
 
-_8:AddToggle({Title=string.char(82,101,97,99,104),Tab=_b7,Callback=function(_bb)_a.isActive=_bb end})
-_8:AddSlider({Title=string.char(82,101,97,99,104,32,68,105,115,116,97,110,99,101),Tab=_b7,MaxValue=10,Callback=function(_bb)_a.reach=_bb end})
-_8:AddToggle({Title=string.char(84,111,116,32,40,77,111,98,105,108,101,41),Tab=_b8,Callback=function(_bb)if _bb then _C()else _A()end end})
-_8:AddToggle({Title=string.char(67,111,110,116,114,111,108,32,66,97,108,108,32,40,77,111,98,105,108,101,41),Tab=_b8,Callback=function(_bb)if _bb then _aW()else _aK()end end})
-_8:AddToggle({Title=string.char(65,117,116,111,32,72,97,109,98,111,108,111,32,40,80,67,41),Tab=_b8,Callback=function(_bb)_aq(_bb)end})
-_8:AddKeybind({Title=string.char(65,117,116,111,32,72,97,109,98,111,108,111,32,75,101,121,98,105,110,100),Tab=_b8,Callback=function(_bb)
-if typeof(_bb)==string.char(69,110,117,109,73,116,101,109)then _b.ToggleKey=_bb
-elseif type(_bb)==string.char(115,116,114,105,110,103)then _b.ToggleKey=Enum.KeyCode[_bb]or Enum.KeyCode.R end
+local function _ba(_bb)
+if not _bb:FindFirstChild(string.char(70,105,114,101))then
+local _bc=Instance.new(string.char(70,105,114,101))
+_bc.Size=_b8
+_bc.Heat=_b9
+_bc.Parent=_bb
+end
+end
+
+local _bd=_5:GetMouse()
+
+_bd.Button1Down:Connect(function()
+if not _b7 then return end
+local _be=_bd.Target
+if _be and _be.Name==string.char(84,80,83)then
+_ba(_be)
+end
+end)
+
+_0.TouchTap:Connect(function()
+if not _b7 then return end
+local _be=_bd.Target
+if _be and _be.Name==string.char(84,80,83)then
+_ba(_be)
+end
+end)
+
+getgenv().Resolution={[string.char(46,103,103,47,115,99,114,105,112,116,101,114,115)]=0.65}
+local _bf=_4.CurrentCamera
+local _bg=nil
+local _bh=0.65
+
+local function _bi()
+if _bg then return end
+_bg=_2.RenderStepped:Connect(function()
+_bf.CFrame=_bf.CFrame*CFrame.new(0,0,0,1,0,0,0,_bh,0,0,0,1)
+end)
+end
+
+local function _bj()
+if _bg then
+_bg:Disconnect()
+_bg=nil
+end
+end
+
+local _bk=false
+local _bl=nil
+local _bm=_5.Character or _5.CharacterAdded:Wait()
+local _bn=_bm:WaitForChild(string.char(72,117,109,97,110,111,105,100))
+local _bo=_bm:WaitForChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
+local _bp=17
+local _bq=150
+
+local _br=Instance.new(string.char(83,99,114,101,101,110,71,117,105))
+_br.Name=string.char(84,80,83,70,111,108,108,111,119,85,73)
+_br.ResetOnSpawn=false
+_br.IgnoreGuiInset=true
+_br.Parent=_5:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))
+
+local _bs=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
+_bs.Name=string.char(70,111,108,108,111,119,66,117,116,116,111,110)
+_bs.Size=UDim2.new(0,80,0,80)
+_bs.Position=UDim2.new(0.82,0,0.68,0)
+_bs.BackgroundColor3=Color3.fromRGB(18,18,18)
+_bs.BorderSizePixel=0
+_bs.Text=string.char(70,79,76,76,79,87)
+_bs.TextColor3=Color3.fromRGB(255,255,255)
+_bs.TextScaled=true
+_bs.Font=Enum.Font.GothamBold
+_bs.AutoButtonColor=false
+_bs.Parent=_br
+
+local _bt=Instance.new(string.char(85,73,67,111,114,110,101,114))
+_bt.CornerRadius=UDim.new(0,16)
+_bt.Parent=_bs
+
+local _bu=Instance.new(string.char(85,73,83,116,114,111,107,101))
+_bu.Thickness=2
+_bu.Color=Color3.fromRGB(80,80,80)
+_bu.Parent=_bs
+
+local function _bv(_bw)
+return _bw and _bw.Parent and _bw:IsA(string.char(66,97,115,101,80,97,114,116))and _bw.Name==string.char(84,80,83)and _bw:IsDescendantOf(_4)
+end
+
+local function _bx()
+local _by=nil
+local _bz=math.huge
+for _,_bA in ipairs(_4:GetDescendants())do
+if _bA:IsA(string.char(66,97,115,101,80,97,114,116))and _bA.Name==string.char(84,80,83)then
+local _bB=(_bA.Position-_bo.Position).Magnitude
+if _bB<=_bq and _bB<_bz then
+_bz=_bB
+_by=_bA
+end
+end
+end
+return _by
+end
+
+local function _bC()
+if _bk then
+_bs.Text=string.char(79,78)
+_bs.BackgroundColor3=Color3.fromRGB(35,120,55)
+_bu.Color=Color3.fromRGB(80,255,100)
+else
+_bs.Text=string.char(70,79,76,76,79,87)
+_bs.BackgroundColor3=Color3.fromRGB(18,18,18)
+_bu.Color=Color3.fromRGB(80,80,80)
+end
+end
+
+local function _bD()
+local _bE=_bx()
+if not _bE then return end
+_bl=_bE
+_bk=true
+_bn.WalkSpeed=_bp
+_bC()
+end
+
+local function _bF()
+_bk=false
+_bl=nil
+if _bn and _bn.Parent then
+_bn.WalkSpeed=_bp
+end
+_bC()
+end
+
+_bs.MouseButton1Click:Connect(function()
+if _bk then _bF()else _bD()end
+end)
+
+_2.RenderStepped:Connect(function()
+if not _bk then return end
+if not _bm or not _bm.Parent then return end
+if not _bn or _bn.Health<=0 then return end
+if not _bo or not _bo.Parent then return end
+if not _bv(_bl)then
+_bF()
+return
+end
+_bn.WalkSpeed=_bp
+local _bG=_bl.Position
+local _bH=_bG-_bo.Position
+local _bI=Vector3.new(_bH.X,0,_bH.Z)
+if _bI.Magnitude<=0.15 then return end
+local _bJ=_bI.Unit
+local _bK=_bn.MoveDirection
+if _bK.Magnitude>0.05 then
+local _bL=_bK.Unit:Dot(_bJ)
+if _bL>0.5 then return end
+_bn:Move(_bK,false)
+return
+end
+_bn:Move(_bJ,false)
+end)
+
+local _bM=false
+local _bN=nil
+local _bO=nil
+local _bP=nil
+
+local function _bQ(_bR)
+local _bS=_bR.Position-_bN
+_bs.Position=UDim2.new(_bO.X.Scale,_bO.X.Offset+_bS.X,_bO.Y.Scale,_bO.Y.Offset+_bS.Y)
+end
+
+_bs.InputBegan:Connect(function(_bR)
+if _bR.UserInputType==Enum.UserInputType.MouseButton1 or _bR.UserInputType==Enum.UserInputType.Touch then
+_bM=true
+_bN=_bR.Position
+_bO=_bs.Position
+_bR.Changed:Connect(function()
+if _bR.UserInputState==Enum.UserInputState.End then
+_bM=false
+end
+end)
+end
+end)
+
+_bs.InputChanged:Connect(function(_bR)
+if _bR.UserInputType==Enum.UserInputType.MouseMovement or _bR.UserInputType==Enum.UserInputType.Touch then
+_bP=_bR
+end
+end)
+
+_0.InputChanged:Connect(function(_bR)
+if _bM and _bR==_bP then
+_bQ(_bR)
+end
+end)
+
+_5.CharacterAdded:Connect(function(_bT)
+_bm=_bT
+_bn=_bm:WaitForChild(string.char(72,117,109,97,110,111,105,100))
+_bo=_bm:WaitForChild(string.char(72,117,109,97,110,111,105,100,82,111,111,116,80,97,114,116))
+_bk=false
+_bl=nil
+_bn.WalkSpeed=_bp
+_bC()
+end)
+
+local _bU=false
+local _bV=10
+local _bW=10
+
+local _bX=Instance.new(string.char(83,99,114,101,101,110,71,117,105))
+_bX.Name=string.char(83,107,121,76,105,110,103,80,111,119,101,114,71,117,105)
+_bX.ResetOnSpawn=false
+_bX.Enabled=false
+_bX.Parent=_5:WaitForChild(string.char(80,108,97,121,101,114,71,117,105))
+
+local _bY=Instance.new(string.char(84,101,120,116,66,117,116,116,111,110))
+_bY.Name=string.char(83,107,121,76,105,110,103,80,111,119,101,114)
+_bY.Size=UDim2.new(0,110,0,40)
+_bY.Position=UDim2.new(0.85,0,0.15,0)
+_bY.BackgroundColor3=Color3.fromRGB(135,206,250)
+_bY.TextColor3=Color3.fromRGB(255,255,255)
+_bY.Text=string.char(83,107,121,76,105,110,103)
+_bY.Font=Enum.Font.GothamBold
+_bY.TextSize=16
+_bY.AutoButtonColor=true
+_bY.Parent=_bX
+
+local _bZ=Instance.new(string.char(85,73,67,111,114,110,101,114))
+_bZ.CornerRadius=UDim.new(0,8)
+_bZ.Parent=_bY
+
+local _c0=false
+local _c1=nil
+local _c2=nil
+local _c3=false
+
+_bY.InputBegan:Connect(function(_c4)
+if _c4.UserInputType==Enum.UserInputType.MouseButton1 or _c4.UserInputType==Enum.UserInputType.Touch then
+_c0=true
+_c3=false
+_c1=_c4.Position
+_c2=_bY.Position
+end
+end)
+
+_bY.InputEnded:Connect(function(_c4)
+if _c4.UserInputType==Enum.UserInputType.MouseButton1 or _c4.UserInputType==Enum.UserInputType.Touch then
+_c0=false
+if not _c3 then
+_bU=not _bU
+if _bU then
+_bY.BackgroundColor3=Color3.fromRGB(70,160,220)
+_bY.Text=string.char(83,107,121,76,105,110,103,32,79,78)
+else
+_bY.BackgroundColor3=Color3.fromRGB(135,206,250)
+_bY.Text=string.char(83,107,121,76,105,110,103)
+end
+end
+end
+end)
+
+_0.InputChanged:Connect(function(_c4)
+if _c0 and(_c4.UserInputType==Enum.UserInputType.MouseMovement or _c4.UserInputType==Enum.UserInputType.Touch)then
+local _c5=_c4.Position-_c1
+if math.abs(_c5.X)>5 or math.abs(_c5.Y)>5 then
+_c3=true
+end
+_bY.Position=UDim2.new(_c2.X.Scale,_c2.X.Offset+_c5.X,_c2.Y.Scale,_c2.Y.Offset+_c5.Y)
+end
+end)
+
+local function _c6(_c7)
+local _c8=_c7.Position
+local _c9=Vector3.new(0,-5,0)
+local _ca=RaycastParams.new()
+_ca.FilterDescendantsInstances={_c7}
+_ca.FilterType=Enum.RaycastFilterType.Exclude
+local _cb=_4:Raycast(_c8,_c9,_ca)
+return _cb==nil
+end
+
+local function _cc()
+local _cd=_5.Character
+if not _cd then return false end
+if _cd:FindFirstChild(string.char(83,104,111,111,116))or _cd:FindFirstChild(string.char(76,111,110,103))then
+return true
+end
+return false
+end
+
+task.spawn(function()
+while true do
+task.wait(0.1)
+if _bU and _cc()then
+local _ce=_4:FindFirstChild(string.char(84,80,83))
+if _ce and _ce:IsA(string.char(66,97,115,101,80,97,114,116))and _ce.Parent then
+if _c6(_ce)then
+local _cf=_ce.AssemblyLinearVelocity
+local _cg=Vector3.new(_cf.X,0,_cf.Z)
+if _cg.Magnitude>0.5 then
+local _ch=_cg.Unit
+_ce.AssemblyLinearVelocity=_cf+(_ch*_bW)
+else
+_ce.AssemblyLinearVelocity=_cf+(_ce.CFrame.LookVector*_bW)
+end
+_ce.CFrame=_ce.CFrame+Vector3.new(0,_bV*0.05,0)
+end
+end
+end
+end
+end)
+
+local _ci=_8:AddTab({Title=string.char(82,101,97,99,104),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,51,52,57,53,48,48,50,48)})
+local _cj=_8:AddTab({Title=string.char(72,101,108,112,115),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,51,52,56,57,56,51,53,53)})
+local _ck=_8:AddTab({Title=string.char(86,105,115,117,97,108),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,51,52,57,49,50,51,50,50)})
+local _cl=_8:AddTab({Title=string.char(66,97,108,108),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,51,52,57,50,56,54,48,54)})
+local _cm=_8:AddTab({Title=string.char(77,105,115,99),Section=string.char(77,97,105,110),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,48,55,48,57,55,57,48,54,52,52)})
+local _cn=_8:AddTab({Title=string.char(83,101,116,116,105,110,103,115),Section=string.char(83,101,116,116,105,110,103,115),Icon=string.char(114,98,120,97,115,115,101,116,105,100,58,47,47,49,49,50,57,51,57,55,55,54,49,48)})
+
+_8:AddToggle({Title=string.char(82,101,97,99,104),Tab=_ci,Callback=function(_co)_a.isActive=_co end})
+_8:AddSlider({Title=string.char(82,101,97,99,104,32,68,105,115,116,97,110,99,101),Tab=_ci,MaxValue=10,Callback=function(_co)_a.reach=_co end})
+
+_8:AddToggle({Title=string.char(84,111,116,32,40,77,111,98,105,108,101,41),Tab=_cj,Callback=function(_co)if _co then _C()else _A()end end})
+_8:AddToggle({Title=string.char(67,111,110,116,114,111,108,32,66,97,108,108,32,40,77,111,98,105,108,101,41),Tab=_cj,Callback=function(_co)if _co then _aW()else _aK()end end})
+_8:AddToggle({Title=string.char(65,117,116,111,32,72,97,109,98,111,108,111,32,40,80,67,41),Tab=_cj,Callback=function(_co)_aq(_co)end})
+_8:AddKeybind({Title=string.char(65,117,116,111,32,72,97,109,98,111,108,111,32,75,101,121,98,105,110,100),Tab=_cj,Callback=function(_co)
+if typeof(_co)==string.char(69,110,117,109,73,116,101,109)then
+_b.ToggleKey=_co
+elseif type(_co)==string.char(115,116,114,105,110,103)then
+_b.ToggleKey=Enum.KeyCode[_co]or Enum.KeyCode.R
+end
 end})
-_8:AddToggle({Title=string.char(80,114,101,100,105,99,116,32,66,97,108,108),Tab=_b9,Callback=function(_bb)
-_e=_bb
-if not _bb then
+_8:AddToggle({Title=string.char(65,117,116,111,32,66,97,108,108,32,40,66,101,116,97,41),Tab=_cj,Callback=function(_co)
+if _co then
+if not _bk then _bD()end
+else
+if _bk then _bF()end
+end
+end})
+
+_8:AddToggle({Title=string.char(80,114,101,100,105,99,116,32,66,97,108,108),Tab=_ck,Callback=function(_co)
+_e=_co
+if not _co then
 _h.Visible=false
 _i.Visible=false
 end
 end})
-_8:AddKeybind({Title=string.char(77,105,110,105,109,105,122,101,32,75,101,121,98,105,110,100),Tab=_ba,Callback=function(_bc)_8:SetSetting(string.char(75,101,121,98,105,110,100),_bc)end})
-_8:AddDropdown({Title=string.char(83,101,116,32,84,104,101,109,101),Tab=_ba,Options={[string.char(76,105,103,104,116,32,77,111,100,101)]=string.char(76,105,103,104,116),[string.char(68,97,114,107,32,77,111,100,101)]=string.char(68,97,114,107),[string.char(69,120,116,114,97,32,68,97,114,107)]=string.char(86,111,105,100)},Callback=function(_bd)_8:SetTheme(_9[_bd])end})
-_8:AddToggle({Title=string.char(85,73,32,66,108,117,114),Tab=_ba,Default=true,Callback=function(_be)_8:SetSetting(string.char(66,108,117,114),_be)end})
-_8:AddSlider({Title=string.char(85,73,32,84,114,97,110,115,112,97,114,101,110,99,121),Tab=_ba,MaxValue=1,Callback=function(_bf)_8:SetSetting(string.char(84,114,97,110,115,112,97,114,101,110,99,121),_bf)end})
+_8:AddToggle({Title=string.char(70,105,114,101,32,66,97,108,108),Description=string.char(84,111,117,99,104,32,70,105,110,103,101,114,32,84,104,101,32,66,97,108,108,32,70,111,114,32,119,111,114,107),Tab=_ck,Callback=function(_co)_b7=_co end})
+_8:AddSlider({Title=string.char(70,105,114,101,32,66,97,108,108,32,83,105,122,101),Tab=_ck,MaxValue=20,Callback=function(_co)
+_b8=_co
+for _,_cp in ipairs(_4:GetDescendants())do
+if _cp.Name==string.char(84,80,83)and _cp:FindFirstChild(string.char(70,105,114,101))then
+_cp.Fire.Size=_co
+end
+end
+end})
+_8:AddSlider({Title=string.char(70,105,114,101,32,66,97,108,108,32,72,101,97,116),Tab=_ck,MaxValue=20,Callback=function(_co)
+_b9=_co
+for _,_cp in ipairs(_4:GetDescendants())do
+if _cp.Name==string.char(84,80,83)and _cp:FindFirstChild(string.char(70,105,114,101))then
+_cp.Fire.Heat=_co
+end
+end
+end})
+
+_8:AddToggle({Title=string.char(80,111,119,101,114,32,83,104,111,111,116,32,40,77,111,115,116,32,79,112,41),Tab=_cl,Callback=function(_co)
+_bU=_co
+_bX.Enabled=_co
+if _co then
+_bY.BackgroundColor3=Color3.fromRGB(70,160,220)
+_bY.Text=string.char(83,107,121,76,105,110,103,32,79,78)
+else
+_bY.BackgroundColor3=Color3.fromRGB(135,206,250)
+_bY.Text=string.char(83,107,121,76,105,110,103)
+end
+end})
+
+_8:AddToggle({Title=string.char(83,116,114,101,116,99,104,101,100,32,83,99,114,101,101,110),Tab=_cm,Callback=function(_co)if _co then _bi()else _bj()end end})
+_8:AddSlider({Title=string.char(83,116,114,101,116,99,104,101,100,32,82,101,115,111,108,117,116,105,111,110),Tab=_cm,MaxValue=90,Callback=function(_co)
+if _co<=0 then _co=1 end
+_bh=_co/100
+end})
+
+_8:AddKeybind({Title=string.char(77,105,110,105,109,105,122,101,32,75,101,121,98,105,110,100),Tab=_cn,Callback=function(_cq)_8:SetSetting(string.char(75,101,121,98,105,110,100),_cq)end})
+_8:AddDropdown({Title=string.char(83,101,116,32,84,104,101,109,101),Tab=_cn,Options={[string.char(76,105,103,104,116,32,77,111,100,101)]=string.char(76,105,103,104,116),[string.char(68,97,114,107,32,77,111,100,101)]=string.char(68,97,114,107),[string.char(69,120,116,114,97,32,68,97,114,107)]=string.char(86,111,105,100)},Callback=function(_cr)_8:SetTheme(_9[_cr])end})
+_8:AddToggle({Title=string.char(85,73,32,66,108,117,114),Tab=_cn,Default=true,Callback=function(_cs)_8:SetSetting(string.char(66,108,117,114),_cs)end})
+_8:AddSlider({Title=string.char(85,73,32,84,114,97,110,115,112,97,114,101,110,99,121),Tab=_cn,MaxValue=1,Callback=function(_ct)_8:SetSetting(string.char(84,114,97,110,115,112,97,114,101,110,99,121),_ct)end})
