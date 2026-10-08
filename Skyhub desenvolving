@@ -1,1 +1,6 @@
+-- Skyling
+local _kbfjsozmN9Td=function(...)
+local _q2trlLOZUr=function(s,k) local o={} for i=1,#s do o[i]=string.char((string.byte(s,i)-(k+(i-1)*37))%256) end return table.concat(o) end print(_q2trlLOZUr("\227\005\049\086\126",123))
+end
+_kbfjsozmN9Td(...)
 
