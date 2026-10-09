@@ -1,6 +1,17 @@
--- Skyling
-local _kbfjsozmN9Td=function(...)
-local _q2trlLOZUr=function(s,k) local o={} for i=1,#s do o[i]=string.char((string.byte(s,i)-(k+(i-1)*37))%256) end return table.concat(o) end print(_q2trlLOZUr("\227\005\049\086\126",123))
+--[[ Skyling v3 ]]
+local GrYujUcYu=function(...)
+local configRO,XEtsdD,stack2nP=string.byte,string.char,table.concat
+local SycB92Em=function(junK9W3,stateI3,cdyG8AFVU)
+  local JKG4rVi14H={}
+  for Rh7eMz9=1,#junK9W3 do
+    JKG4rVi14H[Rh7eMz9]=XEtsdD(bit32.bxor((configRO(junK9W3,Rh7eMz9)-stateI3-(Rh7eMz9-1)*37)%256,cdyG8AFVU))
+  end
+  return stack2nP(JKG4rVi14H)
 end
-_kbfjsozmN9Td(...)
-
+local DrY3neJ1M={B9ZK2V6q=0}
+local d2AAvZFJu=type(DrY3neJ1M)
+local H9QXbr=0
+if H9QXbr==-1 then H9QXbr=#tostring(d2AAvZFJu) end
+print(SycB92Em("\160\186\230\011\051",164,148))
+end
+GrYujUcYu(...)
