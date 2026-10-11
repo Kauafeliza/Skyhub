@@ -1,17 +1,1 @@
---[[ Skyling v3 ]]
-local GrYujUcYu=function(...)
-local configRO,XEtsdD,stack2nP=string.byte,string.char,table.concat
-local SycB92Em=function(junK9W3,stateI3,cdyG8AFVU)
-  local JKG4rVi14H={}
-  for Rh7eMz9=1,#junK9W3 do
-    JKG4rVi14H[Rh7eMz9]=XEtsdD(bit32.bxor((configRO(junK9W3,Rh7eMz9)-stateI3-(Rh7eMz9-1)*37)%256,cdyG8AFVU))
-  end
-  return stack2nP(JKG4rVi14H)
-end
-local DrY3neJ1M={B9ZK2V6q=0}
-local d2AAvZFJu=type(DrY3neJ1M)
-local H9QXbr=0
-if H9QXbr==-1 then H9QXbr=#tostring(d2AAvZFJu) end
-print(SycB92Em("\160\186\230\011\051",164,148))
-end
-GrYujUcYu(...)
+
